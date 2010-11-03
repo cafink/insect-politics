@@ -1,0 +1,172 @@
+/*  Headers & Footers */
+
+#header {
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+#footer {
+	text-align: center;
+	clear: both;
+	padding-top: 2em;
+}
+
+/* Body & Content */
+
+body {
+	margin: 5%;
+	font-family: Georgia, "Times New Roman", serif;
+}
+
+h1, h2 {
+	font-family: Rockwell, Arial, Verdana, sans-serif;
+}
+
+#content {
+	float: left;
+	width: 65%
+}
+
+#content.no-sidebar {
+	width: 100%
+}
+
+#content h1, #content h2, #content h3 {
+	margin: 0em;
+	padding: 0em;
+}
+
+.note {
+	color: #888888;
+	font-style: italic;
+	font-size: 80%;
+}
+
+/* Posts */
+
+.post {
+	margin-bottom: 2.5em;
+}
+
+.snippet-link {
+	margin-right: 1em;
+}
+
+/* Sidebar */
+
+#sidebar {
+	float: right;
+	border: 1px solid;
+	width: 25%;
+	padding: 2%;
+}
+
+#sidebar .social-media img {
+	border-style: none;
+	margin: 0 2em 0 0;
+}
+
+#sidebar .social-media img.last {
+	margin-right: 0;
+}
+
+#sidebar .author .photo, #sidebar .social-media {
+	display: table; /* not supported by IE, but who cares? */
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#comment-list ul, #tag-list ul, #tags ul {
+	list-style-type: none;
+	padding-left: 0;
+}
+
+#comment-list .header {
+	margin-bottom: 0.5em;
+}
+
+#comment-list .content:before {
+	content: '\201C';  /* left double-quote */
+}
+
+#comment-list .content:after {
+	content: '\201D';  /* right double-quote */
+}
+
+#tag-list li, #comment-list li, #tags li {
+	margin-bottom: 1em;
+}
+
+/* Comments */
+
+#comment-form label {
+	text-transform: capitalize;
+}
+
+#comment-form .note {
+	text-transform: none;
+}
+
+#comment-form label, #comment-form text, #comment-form textarea {
+	display: block;
+}
+
+#comments h3 {
+	margin: 1em 0;
+}
+
+#comments .timestamp {
+	color: #888888;
+	font-style: italic;
+	font-size: 80%;
+}
+
+#comments .comment {
+	margin-bottom: 2em;
+}
+
+#comments .comment .header {
+	font-weight: bold;
+}
+
+.by-author {
+	display: table; /* not supported by IE, but who cares? */
+	padding: 0.5em;
+	border-radius: 0.5em;
+	background-color: #CCCCCC;
+}
+
+/* Images */
+
+.caption {
+	color: #888888;
+	font-style: italic;
+	font-size: 80%;
+}
+
+.caption i, .caption em {
+	font-style: normal;
+}
+
+/* Tags */
+
+#tags {
+	margin-top: 2em;
+}
+
+#post-tags {
+	margin: 2em 0;
+}
+
+#post-tags a {
+	margin-right: 0.5em;
+}
+
+.tag {
+	border-radius: 0.5em;
+	color: #FFFFFF;
+	background-color: #888888;
+	padding: 0.25em 0.5em;
+	text-decoration: none;
+	text-transform: capitalize;
+}
