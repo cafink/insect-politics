@@ -14,7 +14,7 @@ class Tag extends BaseRow {
 		$this->associations = array(
 			'posts' => new ManyToMany(array(
 				'class'      => 'Post',
-				'table'      => 'posts_tags_map',
+				'table'      => 'posts_tags_map',  
 				'local_key'  => 'tag_id',
 				'remote_key' => 'post_id'
 			))
@@ -50,11 +50,13 @@ function TagTable () {
 	return new Tag();
 }
 
+//  Sort tags according to "popularity."
+//  The more posts are tagged with a given tag,
+//  the more popular we consider it.
 function _popsort ($a, $b) {
 	if (count($a->posts) == count($b->posts))
 		return 0;
 	return (count($a->posts) > count($b->posts)) ? -1 : 1;
 }
-
 
 ?>

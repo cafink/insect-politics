@@ -7,6 +7,10 @@ class Comment extends BaseRow {
 
 	public $table_name = 'comments';
 
+	protected $scopes = array(
+			'approved' => array('fields' => 'status', 'values' => 'approved')
+	);
+
 	function setup() {
 		$this->associations = array(
 			'post' => new BelongsTo(array(
@@ -22,11 +26,7 @@ class Comment extends BaseRow {
 
 		// Moved to setup() because we couldn't use the config variable otherwise.
 		// Is this the reason associations are defined in setup()?
-		$this->scopes = array(
-			'ordered'  => array('order_by' => "timestamp {$GLOBALS['config']['comment_order']}"),
-			'approved' => array('fields' => 'status', 'values' => 'approved')
-		);
-
+		$this->default_order_by = "timestamp {$GLOBALS['config']['comment_order']}";
 	}
 
 	function validate ($type) {

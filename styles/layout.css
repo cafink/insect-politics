@@ -22,6 +22,10 @@ h1, h2 {
 	font-family: Rockwell, Arial, Verdana, sans-serif;
 }
 
+h1 a, h2 a {
+	text-decoration: none;
+}
+
 #content {
 	float: left;
 	width: 65%
@@ -50,6 +54,26 @@ h1, h2 {
 
 .snippet-link {
 	margin-right: 1em;
+}
+
+#prev {
+	float: left;
+}
+
+#prev:before {
+	content: '\27F5';  /* long leftward arrow */
+}
+
+#next {
+	float: right;
+}
+
+#next:after {
+	content: '\27F6';  /* long rightward arrow */
+}
+
+#prev-next {
+	margin-bottom: 2em;
 }
 
 /* Sidebar */

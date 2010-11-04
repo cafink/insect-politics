@@ -6,7 +6,8 @@ include_once 'models/Tag.php';
 
 class Post extends BaseRow {
 
-	public $table_name = "posts";
+	public $table_name = 'posts';
+	public $default_order_by = 'timestamp ASC';
 
 	function setup() {
 		$this->associations = array(
@@ -48,7 +49,7 @@ class Post extends BaseRow {
 			$this->body
 		);
 
-		$this->comments = $this->scope('approved')->scope('ordered')->comments;
+		$this->comments = $this->scope('approved')->comments;
 
 		$snippet_marker = $GLOBALS['config']['snippet_marker'];
 
@@ -75,6 +76,22 @@ class Post extends BaseRow {
 			else
 				$comment->by_author = false;
 		}
+
+		// Determine the previous/next posts.
+		$this->prev = $this->find(array(
+			'where'           => "timestamp < '{$this->timestamp}'",
+			'sort_fields'     => 'timestamp',
+			'sort_directions' => 'DESC',
+			'first'           => true,
+			'callback'        => false
+		));
+		$this->next = $this->find(array(
+			'where'           => "timestamp > '{$this->timestamp}'",
+			'sort_fields'     => 'timestamp',
+			'sort_directions' => 'ASC',
+			'first'           => true,
+			'callback'        => false
+		));
 	}
 }
 

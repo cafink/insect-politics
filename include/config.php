@@ -15,7 +15,7 @@
 // Configuration Options
 $config = array();
 
-$config['site_name'] = 'NSM Game';
+$config['site_name'] = 'Insect Politics';
 
 /**
  * This variable is set in the profile

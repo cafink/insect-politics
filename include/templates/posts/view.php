@@ -1,3 +1,14 @@
+<div id="prev-next">
+	<?php
+
+		if (!is_null($post->prev))
+			echo '<a id="prev" href="' . PathToRoot::get() . 'posts/view/' . $post->prev->id . '">' . $post->prev->title . '</a>';
+		if (!is_null($post->next))
+			echo '<a id="next" href="' . PathToRoot::get() . 'posts/view/' . $post->next->id . '">' . $post->next->title . '</a>';
+
+	?>
+</div>
+
 <h1><?php echo $post->title; ?></h1>
 
 <!--<h2>by <a href="<?php echo PathToRoot::get(); ?>authors/view/<?php echo $post->author->id; ?>"><?php echo $post->author->name; ?></a></h2>-->

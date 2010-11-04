@@ -12,7 +12,7 @@
 		if ($post->has_snippet || $GLOBALS['config']['show_comments']) {
 			echo '<div class="links">';
 			if ($post->has_snippet)
-				echo '<a href="' . PathToRoot::get() . 'posts/view/' . $post->id . '#continue" class="snippet-link">Read the rest</a>';
+				echo '<a href="' . PathToRoot::get() . 'posts/view/' . $post->id . '#continue" class="snippet-link">continue reading</a>';
 			if ($GLOBALS['config']['show_comments'])
 				echo '<a href="' . PathToRoot::get() . 'posts/view/' . $post->id . '#comments" class="comment-link">' . count($post->comments) . ' comment' . ( count($post->comments) == 1 ? '' : 's') .'</a>';
 			echo '</div>';
