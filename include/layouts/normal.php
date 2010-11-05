@@ -25,9 +25,10 @@
 			     '" width="' . $GLOBALS['config']['logo']['width'] .
 			     '" height="' . $GLOBALS['config']['logo']['height'] .
 			     '" alt="' . $GLOBALS['config']['site_name'] . '" /></a>';
-		echo '</div><div id="content"' . (isset($page['sidebar']) ? '' : ' class="no-sidebar"') . '>' . $page['content'] . '</div>';
+		echo '</div><div id="content-' . (isset($page['sidebar']) ? 'sidebar-' : '') . 'wrapper"><div id="content"' . (isset($page['sidebar']) ? '' : ' class="no-sidebar"') . '>' . $page['content'] . '</div>';
 		if (isset($page['sidebar']))
 			echo $page['sidebar'];
+		echo '</div>';
 	?>
 	<div id="footer">&copy; 2010 Carl Fink</div>
 </body>
