@@ -169,6 +169,10 @@ h1 a, h2 a {
 	background-color: #CCCCCC;
 }
 
+#comments .by-author .timestamp {
+	color: #333333;
+}
+
 /* Images */
 
 .caption {

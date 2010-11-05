@@ -22,6 +22,8 @@ if (!isset($routes)) {
 $routes[] = new ChitinRoute(':controller/:action/:id', array(), array('action' => 'edit|delete|view', 'id' => '\d+'));
 $routes[] = new ChitinRoute(':controller/:action', array('action' => 'index'));
 
+$routes[] = new ChitinRoute('comments/add/:post_id', array('controller' => 'comments', 'action' => 'add'));
+
 // Feed URLs
 $routes[] = new ChitinRoute('rss', array('controller' => 'feeds', 'action' => 'index', 'type' => 'rss'));
 $routes[] = new ChitinRoute('atom', array('controller' => 'feeds', 'action' => 'index', 'type' => 'atom'));
@@ -29,7 +31,5 @@ $routes[] = new ChitinRoute('feeds/:type', array('controller' => 'feeds', 'actio
 
 // Short URLs for posts: example.com/id instead of example.com/posts/view/id
 $routes[] = new ChitinRoute(':id', array('controller' => 'posts', 'action' => 'view'));
-
-$routes[] = new ChitinRoute('comments/add/:post_id', array('controller' => 'comments', 'action' => 'add'));
 
 ?>
