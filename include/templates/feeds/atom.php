@@ -21,7 +21,12 @@
 				<email><?php echo $post->author->email; ?></email>
 			</author>
 			<content type="html">
-				<?php echo htmlentities($post->feed_body . '<p><a href="http://' . $_SERVER['SERVER_NAME'] . PathToRoot::get() . $post->short_name . '#comments">Read the comments on this post</a></p>'); ?>
+				<?php
+					echo htmlentities(
+						$post->feed_body .
+						'<p><a href="http://' . $_SERVER['SERVER_NAME'] . PathToRoot::get() . $post->short_name . '#comments">Read the comments on this post</a></p>'
+					);
+				?>
 			</content>
 			<published><?php echo date(DATE_ATOM, strtotime($post->timestamp)); ?></published>
 		</entry>
