@@ -69,6 +69,13 @@ class Post extends BaseRow {
 			$this->snippet = $this->body;
 		}
 
+		// Because we can't use relative links in feeds.
+		$this->feed_body = str_replace(
+			'<img src="',
+			'<img src="http://' . $_SERVER['SERVER_NAME'],
+			$this->body
+		);
+
 		// Mark the comments made by the post's author.
 		foreach ($this->comments as $comment) {
 			if (!empty($comment->author_id) && $comment->author_id == $this->author->id)

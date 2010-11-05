@@ -30,6 +30,6 @@
 			echo $page['sidebar'];
 		echo '</div>';
 	?>
-	<div id="footer">&copy; 2010 Carl Fink</div>
+	<div id="footer">&copy; <?php echo $GLOBALS['config']['copyright']; ?></div>
 </body>
 </html>

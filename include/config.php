@@ -54,6 +54,8 @@ $config['pager'] = array();
 );*/
 $config['logo'] = null;
 
+$config['copyright'] = '2010 Carl Fink';
+
 $config['multi_author'] = false;
 
 $config['date_format'] = 'F jS, Y'; //'l, F jS, Y \a\t g:ia';  // Date displayed for each post
