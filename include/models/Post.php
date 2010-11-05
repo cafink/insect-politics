@@ -7,7 +7,7 @@ include_once 'models/Tag.php';
 class Post extends BaseRow {
 
 	public $table_name = 'posts';
-	public $default_order_by = 'timestamp ASC';
+	public $default_order_by = 'timestamp DESC';
 
 	function setup() {
 		$this->associations = array(
