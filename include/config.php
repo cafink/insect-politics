@@ -71,8 +71,8 @@ $config['img'] = array(
 	'large' => array(
 		'prefix' => '',
 		'suffix' => '_lg',
-		'width'  => 540,
-		'height' => 720
+		'width'  => 240,
+		'height' => 320
 	),
 	'small' => array(
 		'prefix' => '',
