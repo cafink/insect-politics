@@ -6,7 +6,7 @@ class ApplicationController extends BaseController {
 
 	protected function sidebar ($params = array()) {
 
-		// Default values.
+		// Default values
 		if (!isset($params['multi_author']))
 			$params['multi_author'] = $GLOBALS['config']['multi_author'];
 		if (!isset($params['show_authors']))
@@ -56,7 +56,8 @@ class ApplicationController extends BaseController {
 			$tags = null;
 		}
 
-		// Unlike with authors and tags, there is a config variable to disable comments altogether.
+		// Unlike authors and tags, comments can be
+		// disabled altogether via a config variable.
 		if (!$GLOBALS['config']['show_comments'])
 			$params['show_comments'] = false;
 

@@ -30,7 +30,7 @@ class Post extends BaseRow {
 		);
 	}
 
-	// @todo:  Accept either a tag name or id
+	// @todo: Accept either a tag name or id
 	function tagScope ($tag_id) {
 		return $this->scope(array('where' => "id IN (SELECT {$this->associations['tags']->local_key} FROM {$this->associations['tags']->table} WHERE {$this->associations['tags']->remote_key} = ?)", 'params' => array($tag_id)));
 	}
@@ -42,7 +42,7 @@ class Post extends BaseRow {
 
 	function callbackAfterFetch () {
 
-		// Need to think of a better way to handle images in posts.
+		// @todo: Think of a better way to handle images in posts.
 		$this->body = str_replace(
 			'<img src="',
 			'<img src="' . PathToRoot::get() . "images/posts/" . $this->short_name . '/', // Why the double quotes?
@@ -70,6 +70,7 @@ class Post extends BaseRow {
 		}
 
 		// Because we can't use relative links in feeds.
+		// @todo: As above, we need to come up with a better solution!
 		$this->feed_body = str_replace(
 			'<img src="',
 			'<img src="http://' . $_SERVER['SERVER_NAME'],
@@ -77,6 +78,7 @@ class Post extends BaseRow {
 		);
 
 		// Mark the comments made by the post's author.
+		// Should we also mark comments made by other authors?
 		foreach ($this->comments as $comment) {
 			if (!empty($comment->author_id) && $comment->author_id == $this->author->id)
 				$comment->by_author = true;

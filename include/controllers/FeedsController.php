@@ -6,8 +6,8 @@ class FeedsController extends ApplicationController {
 
 	function index ($coords) {
 
-		// Is this the right sort order for the posts?
-		// If not, don't forget to adjust the "last updated" fields in the feeds!
+		// I was previously unsure whether or not this is the correct sort
+		// order for a feed, but this is how Blogger does it, at least.
 		$this->posts = PostTable()->find(array('sort_fields' => 'timestamp', 'sort_directions' => 'DESC'));
 
 		if (!$GLOBALS['config']['multi_author'])

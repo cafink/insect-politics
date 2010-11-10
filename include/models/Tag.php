@@ -21,8 +21,9 @@ class Tag extends BaseRow {
 		);
 	}
 
-	// @todo:  Find a better way of doing this.  Can we do it in our query,
-	// instead of querying for all rows and doing the work in PHP?
+	// @todo: Find a better way of determining popular tags.
+	// Can we do it in our query, instead of querying for all rows
+	// and doing the work in PHP?
 	function popular ($num = null) {
 
 		if (is_null($num))

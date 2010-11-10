@@ -42,7 +42,7 @@ class Comment extends BaseRow {
 
 	function callbackBeforeSave () {
 
-		// @todo: check whether an author is logged in, and if so,
+		// @todo: Check whether an author is logged in, and if so,
 		// set the author_id foreign key, and set name, e-mail & homepage to NULL.
 		$this->author_id = null;
 
