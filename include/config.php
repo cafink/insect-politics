@@ -108,4 +108,10 @@ $config['snippet_marker'] = '{snip}';
 $config['sidebar_tag_limit'] = 3;
 $config['sidebar_comment_limit'] = 4;
 
+// Null for no feeds
+$config['feeds'] = array(
+	'rss'  => 'RSS',
+	'atom' => 'atom'
+);
+
 ?>

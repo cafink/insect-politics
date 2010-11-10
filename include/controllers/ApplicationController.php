@@ -11,11 +11,14 @@ class ApplicationController extends BaseController {
 			$params['multi_author'] = $GLOBALS['config']['multi_author'];
 		if (!isset($params['show_authors']))
 			$params['show_authors'] = true;
+		if (!isset($params['show_feeds']))
+			$params['show_feeds'] = true;
 		if (!isset($params['show_tags']))
 			$params['show_tags'] = true;
 		if (!isset($params['show_comments']))
 			$params['show_comments'] = true;
 
+		// Author(s)
 		if ($params['show_authors']) {
 			$author_file = 'authors/_' . ( $params['multi_author'] ? 'multi_' : '' ) . 'info.php';
 			$author_view = new TemplateView($author_file);
@@ -28,6 +31,19 @@ class ApplicationController extends BaseController {
 			$authors = null;
 		}
 
+		// Make sure we have feeds to display in the first place.
+		if (!$GLOBALS['config']['feeds'])
+			$params['show_feeds'] = false;
+
+		// Feeds
+		if ($params['show_feeds']) {
+			$feed_view = new TemplateView('feeds/_list.php');
+			$feeds = $feed_view->getOutput();
+		} else {
+			$feeds = null;
+		}
+
+		// Tags
 		if ($params['show_tags']) {
 			$tag_view = new TemplateView('tags/_list.php');
 
@@ -44,6 +60,7 @@ class ApplicationController extends BaseController {
 		if (!$GLOBALS['config']['show_comments'])
 			$params['show_comments'] = false;
 
+		// Comments
 		if ($params['show_comments']) {
 			$comment_view = new TemplateView('comments/_list.php');
 			$comment_view->assign('comments', CommentTable()->scope('approved')->find(array(
@@ -59,12 +76,14 @@ class ApplicationController extends BaseController {
 
 		$view = new TemplateView('sidebar.php');
 
-		$view->assign('authors', $authors);
 		$view->assign('show_authors', $params['show_authors']);
-		$view->assign('tags', $tags);
+		$view->assign('authors', $authors);
+		$view->assign('show_feeds', $params['show_feeds']);
+		$view->assign('feeds', $feeds);
 		$view->assign('show_tags', $params['show_tags']);
-		$view->assign('comments', $comments);
+		$view->assign('tags', $tags);
 		$view->assign('show_comments', $params['show_comments']);
+		$view->assign('comments', $comments);
 		return $view->getOutput();
 	}
 }
