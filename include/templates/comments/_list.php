@@ -20,13 +20,11 @@
 					</a>
 				</div>
 
-				<div class="content">
-					<?php
-						echo htmlentities($comment->snippet);
-						if (strlen($comment->body) > strlen($comment->snippet))
-							echo '&hellip;';
-					?>
-				</div>
+				<div class="content"><?php
+					echo htmlentities($comment->snippet);
+					if (strlen($comment->body) > strlen($comment->snippet))
+						echo '&hellip;';
+				?></div>
 
 			</li>
 		<?php } ?>
