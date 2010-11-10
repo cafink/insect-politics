@@ -116,6 +116,12 @@ h1 a, h2 a {
 
 #comment-list .header {
 	margin-bottom: 0.5em;
+	font-style: italic;
+}
+
+#comment-list .header .commenter, #comment-list .header a {
+	font-weight: bold;
+	font-style: normal;
 }
 
 #comment-list .content:before {
