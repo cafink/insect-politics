@@ -6,7 +6,7 @@ class Author extends BaseRow {
 
 	public $table_name = "authors";
 
-	function setup() {
+	function setup () {
 		$this->associations = array(
 			'posts' => new HasMany(array(
 				'class' => 'Post',

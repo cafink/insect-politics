@@ -11,7 +11,7 @@ class Comment extends BaseRow {
 			'approved' => array('fields' => 'status', 'values' => 'approved')
 	);
 
-	function setup() {
+	function setup () {
 		$this->associations = array(
 			'post' => new BelongsTo(array(
 				'class' => 'Post',
@@ -53,7 +53,7 @@ class Comment extends BaseRow {
 		$this->status = $GLOBALS['config']['approve_comments'] ? 'pending' : 'approved';
 	}
 
-	function callbackAfterFetch() {
+	function callbackAfterFetch () {
 
 		if (empty($this->name))
 			$this->name = 'Anonymous';

@@ -9,7 +9,7 @@ class Post extends BaseRow {
 	public $table_name = 'posts';
 	public $default_order_by = 'timestamp DESC';
 
-	function setup() {
+	function setup () {
 		$this->associations = array(
 			'author' => new BelongsTo(array(
 				'class' => 'Author',

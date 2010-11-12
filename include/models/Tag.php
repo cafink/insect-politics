@@ -10,7 +10,7 @@ class Tag extends BaseRow {
 		'alphabetical' => array('sort_fields' => 'name')
 	);
 
-	function setup() {
+	function setup () {
 		$this->associations = array(
 			'posts' => new ManyToMany(array(
 				'class'      => 'Post',
