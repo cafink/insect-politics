@@ -10,7 +10,7 @@ class FeedsController extends ApplicationController {
 		// order for a feed, but this is how Blogger does it, at least.
 		$this->posts = PostTable()->find(array('sort_fields' => 'timestamp', 'sort_directions' => 'DESC'));
 
-		if (!$GLOBALS['config']['multi_author'])
+		if (!AuthorTable()->multiple())
 			$this->author = AuthorTable()->find(array('first' => true));
 
 		$this->page['layout'] = false;

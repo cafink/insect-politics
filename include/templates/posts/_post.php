@@ -2,7 +2,7 @@
 	<?php
 		echo '<h2><a href="' . PathToRoot::get() . 'posts/view/' . $post->id . '">' . $post->title . '</a></h2>';
 
-		if ($GLOBALS['config']['multi_author'])
+		if (AuthorTable()->multiple())
 			echo '<h3>by <a href="' . PathToRoot::get() . 'authors/view/' . $post->author->id . '">' . $post->author->name . '</a></h3>';
 
 		echo '<h3>' . date($GLOBALS['config']['date_format'], strtotime($post->timestamp)) . '</h3>';

@@ -94,24 +94,42 @@ h1 a, h2 a {
 	padding: 1em;
 }
 
-#sidebar .social-media img {
-	border-style: none;
-	margin: 0 2em 0 0;
+#sidebar h2 {
+	display: inline; /* Allows the feed icon to sit next to the h2 */
 }
 
-#sidebar .social-media img.last {
-	margin-right: 0;
+#sidebar div {
+	margin-bottom: 1.5em;
 }
 
-#sidebar .author .photo, #sidebar .social-media {
+#sidebar .author .photo {
 	display: table; /* not supported by IE, but who cares? */
+	margin-top: 1em;
 	margin-left: auto;
 	margin-right: auto;
 }
 
-#comment-list ul, #tag-list ul, #tags ul {
+#sidebar .social-media {
+	text-align: right;
+}
+
+#sidebar .social-media img {
+	border-style: none;
+	margin: 0 0 0 0.5em;
+}
+
+#feed-icon {
+	margin-left: 1em;
+	vertical-align: text-bottom;
+}
+
+#tag-list ul, #tags ul, #comment-list ul {
 	list-style-type: none;
 	padding-left: 0;
+}
+
+#tag-list li, #tags li, #comment-list li {
+	margin-bottom: 1em;
 }
 
 #comment-list .header {
@@ -130,10 +148,6 @@ h1 a, h2 a {
 
 #comment-list .content:after {
 	content: '\201D';  /* right double-quote */
-}
-
-#tag-list li, #comment-list li, #tags li {
-	margin-bottom: 1em;
 }
 
 /* Comments */

@@ -20,6 +20,14 @@ class Author extends BaseRow {
 		return $errors;
 	}
 
+	// Returns a boolean indicating whether or not there are multiple authors.
+	// Right now, that just requires a simple rowCount(), but it might be
+	// trickier later (by the addition of an "active" field, for example),
+	// hence this dedicated function.
+	function multiple() {
+		return $this->rowCount() > 1;
+	}
+
 	function callbackAfterFetch () {
 
 		$this->short_bio = $this->bio;

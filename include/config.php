@@ -54,11 +54,6 @@ $config['logo'] = null; /*array(
 
 $config['copyright'] = '2010 Carl Fink';
 
-// If true, displays all authors in sidebar of pages
-// that are not associated with a single author,
-// and the given author in pages that are, i.e., post/view/
-$config['multi_author'] = false;
-
 // Date displayed for each post
 $config['date_format'] = 'F jS, Y';
 

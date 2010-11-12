@@ -7,7 +7,7 @@ class AuthorsController extends ApplicationController {
 	function index ($coords) {
 
 		// If there is only one author, redirect to his page.
-		if (!$GLOBALS['config']['multi_author']) {
+		if (!AuthorTable()->multiple()) {
 			$author = AuthorTable()->find(array('first' => true));
 			$this->redirect('authors/view/' . $author->id);
 		}

@@ -8,7 +8,7 @@ class ApplicationController extends BaseController {
 
 		// Default values
 		if (!isset($params['multi_author']))
-			$params['multi_author'] = $GLOBALS['config']['multi_author'];
+			$params['multi_author'] = AuthorTable()->multiple();
 		if (!isset($params['show_authors']))
 			$params['show_authors'] = true;
 		if (!isset($params['show_feeds']))

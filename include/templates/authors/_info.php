@@ -1,4 +1,11 @@
 <div class="author">
+
+	<h2>
+		<!--<a href="<?php echo PathToRoot::get(); ?>authors/view/<?php echo $author->id; ?>">-->
+			<?php echo $author->name; ?>
+		<!--</a>-->
+	</h2>
+
 	<!--<a href="<?php echo PathToRoot::get(); ?>authors/view/<?php echo $author->id; ?>">-->
 		<img
 			src="<?php echo PathToRoot::get(); ?>images/authors/<?php echo $author->images['small']; ?>"
@@ -8,12 +15,6 @@
 			class="photo"
 		/>
 	<!--</a>-->
-
-	<h2>
-		<!--<a href="<?php echo PathToRoot::get(); ?>authors/view/<?php echo $author->id; ?>">-->
-			<?php echo $author->name; ?>
-		<!--</a>-->
-	</h2>
 
 	<p><?php echo $author->short_bio; ?></p>
 
@@ -30,7 +31,7 @@
 					$class .= ' last';
 
 				echo '<a href="http://www.facebook.com/' . $author->facebook_username . '">';
-				echo '<img src="' . PathToRoot::get() . 'images/social-media/facebook.png" width="60" height="60" class="' . $class . '" alt="Become ' . $author->name . '\'s friend on Facebook" />';
+				echo '<img src="' . PathToRoot::get() . 'images/social-media/facebook.png" width="24" height="24" class="' . $class . '" alt="Become ' . $author->name . '\'s friend on Facebook" />';
 				echo '</a>';
 			}
 
@@ -41,7 +42,7 @@
 					$class = 'first ' . $class;
 
 				echo '<a href="http://www.twitter.com/' . $author->twitter_username . '">';
-				echo '<img src="' . PathToRoot::get() . 'images/social-media/twitter.png" width="60" height="60" class="' . $class . '" alt="Follow ' . $author->name . ' on Twitter" />';
+				echo '<img src="' . PathToRoot::get() . 'images/social-media/twitter.png" width="24" height="24" class="' . $class . '" alt="Follow ' . $author->name . ' on Twitter" />';
 				echo '</a>';
 			}
 
