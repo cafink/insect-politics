@@ -84,6 +84,12 @@ h1 a, h2 a {
 	margin-bottom: 2em;
 }
 
+/* Authors */
+
+#author-posts {
+	padding-top: 2.5em;
+}
+
 /* Sidebar */
 
 #sidebar {

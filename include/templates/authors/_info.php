@@ -8,15 +8,15 @@
 
 	<a href="<?php echo PathToRoot::get(); ?>authors/view/<?php echo $author->id; ?>">
 		<img
-			src="<?php echo PathToRoot::get(); ?>images/authors/<?php echo $author->images['small']; ?>"
-			width="<?php echo $GLOBALS['config']['img']['small']['width']; ?>"
-			height="<?php echo $GLOBALS['config']['img']['small']['height']; ?>"
+			src="<?php echo PathToRoot::get(); ?>images/authors/<?php echo $author->img; ?>"
+			width="<?php echo $GLOBALS['config']['author_img']['width']; ?>"
+			height="<?php echo $GLOBALS['config']['author_img']['height']; ?>"
 			alt="<?php echo $author->name; ?>"
 			class="photo"
 		/>
 	</a>
 
-	<p><?php echo $author->short_bio; ?></p>
+	<p><?php echo $author->bio; ?></p>
 
 	<?php
 		if (!empty($author->facebook_username) || !empty($author->twitter_username)) {
@@ -25,7 +25,7 @@
 
 			if (!empty($author->facebook_username)) {
 
-				//  @todo:  There must be a better way to handle this logic!
+				// @todo:  There must be a better way to handle this logic!
 				$class = 'first';
 				if (empty($author->twitter_username))
 					$class .= ' last';

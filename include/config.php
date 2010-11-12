@@ -62,19 +62,9 @@ $config['timestamp_format'] = 'Y-m-d H:i:s';
 
 // Author images--"small" for the sidebar,
 // "large" for the author pages
-$config['img'] = array(
-	'large' => array(
-		'prefix' => '',
-		'suffix' => '_lg',
-		'width'  => 240,
-		'height' => 320
-	),
-	'small' => array(
-		'prefix' => '',
-		'suffix' => '_sm',
-		'width'  => 192,
-		'height' => 128
-	)
+$config['author_img'] = array(
+	'width'  => 192,
+	'height' => 128
 );
 
 // Whether or not readers may submit new comments

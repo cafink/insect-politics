@@ -1,5 +1,7 @@
 <?php
 
+// @todo: create a feed for a specific author.
+
 include_once 'models/Post.php';
 
 class FeedsController extends ApplicationController {

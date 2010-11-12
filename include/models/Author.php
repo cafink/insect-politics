@@ -28,15 +28,6 @@ class Author extends BaseRow {
 	function multiple() {
 		return $this->rowCount() > 1;
 	}
-
-	function callbackAfterFetch () {
-
-		$this->short_bio = $this->bio;
-
-		$this->images = array();
-		foreach ($GLOBALS['config']['img'] as $size => $details)
-			$this->images[$size] = $details['prefix'] . $this->img . $details['suffix'] . '.jpg';
-	}
 }
 
 function AuthorTable () {

@@ -22,7 +22,10 @@ class AuthorsController extends ApplicationController {
 
 		$this->author = AuthorTable()->get($coords['id']);
 
-		$this->page['sidebar'] = $this->sidebar(array('show_authors' => false));
+		// We already have $this->author->posts, but we can't as easily paginate that.
+		list($this->posts, $this->pager_html) = $this->paginate('Post', 'author_id = ?', array($coords['id']));
+
+		$this->page['sidebar'] = $this->sidebar(array('author' => $this->author));
 		$this->page['title'] = $this->author->name;
 		$this->render();
 	}
