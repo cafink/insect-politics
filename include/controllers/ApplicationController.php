@@ -7,8 +7,6 @@ class ApplicationController extends BaseController {
 	protected function sidebar ($params = array()) {
 
 		// Default values
-		if (!isset($params['multi_author']))
-			$params['multi_author'] = AuthorTable()->multiple();
 		if (!isset($params['show_authors']))
 			$params['show_authors'] = true;
 		if (!isset($params['show_feeds']))
@@ -20,12 +18,25 @@ class ApplicationController extends BaseController {
 
 		// Author(s)
 		if ($params['show_authors']) {
-			$author_file = 'authors/_' . ( $params['multi_author'] ? 'multi_' : '' ) . 'info.php';
-			$author_view = new TemplateView($author_file);
-			if ($params['multi_author'])
-				$author_view->assign('authors', AuthorTable()->find());
+
+			// If an author is specified, or there is only one author in the first place,
+			// just use the single-author template.
+			if (!AuthorTable()->multiple() || isset($params['author']) || isset($params['author_id']))
+				$author_file = 'authors/_info.php';
 			else
+				$author_file = 'authors/_multi_info.php';
+
+			$author_view = new TemplateView($author_file);
+
+			if (!AuthorTable()->multiple())
 				$author_view->assign('author', AuthorTable()->find(array('first' => true)));
+			elseif (isset($params['author']))
+				$author_view->assign('author', $params['author']);
+			elseif (isset($params['author_id']))
+				$author_view->assign('author', AuthorTable()->get($params['author_id']));
+			else
+				$author_view->assign('authors', AuthorTable()->find());
+
 			$authors = $author_view->getOutput();
 		} else {
 			$authors = null;

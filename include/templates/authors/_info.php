@@ -1,12 +1,12 @@
 <div class="author">
 
 	<h2>
-		<!--<a href="<?php echo PathToRoot::get(); ?>authors/view/<?php echo $author->id; ?>">-->
+		<a href="<?php echo PathToRoot::get(); ?>authors/view/<?php echo $author->id; ?>">
 			<?php echo $author->name; ?>
-		<!--</a>-->
+		</a>
 	</h2>
 
-	<!--<a href="<?php echo PathToRoot::get(); ?>authors/view/<?php echo $author->id; ?>">-->
+	<a href="<?php echo PathToRoot::get(); ?>authors/view/<?php echo $author->id; ?>">
 		<img
 			src="<?php echo PathToRoot::get(); ?>images/authors/<?php echo $author->images['small']; ?>"
 			width="<?php echo $GLOBALS['config']['img']['small']['width']; ?>"
@@ -14,7 +14,7 @@
 			alt="<?php echo $author->name; ?>"
 			class="photo"
 		/>
-	<!--</a>-->
+	</a>
 
 	<p><?php echo $author->short_bio; ?></p>
 

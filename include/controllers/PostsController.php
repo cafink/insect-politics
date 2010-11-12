@@ -25,7 +25,7 @@ class PostsController extends ApplicationController {
 		$comment_form_view->assign('post', $this->post);
 		$this->comment_form = $comment_form_view->getOutput();
 
-		$this->page['sidebar'] = $this->sidebar(array('multi_author' => false));
+		$this->page['sidebar'] = $this->sidebar(array('author' => $this->post->author));
 		$this->page['title'] = $this->post->title;
 		$this->render();
 	}

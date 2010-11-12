@@ -5,6 +5,7 @@ include_once 'models/Post.php';
 class Author extends BaseRow {
 
 	public $table_name = "authors";
+	public $default_order_by = 'created DESC'; // Organize by seniority
 
 	function setup () {
 		$this->associations = array(

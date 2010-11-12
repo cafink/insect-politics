@@ -11,7 +11,7 @@
 
 <h1><?php echo $post->title; ?></h1>
 
-<!--<h2>by <a href="<?php echo PathToRoot::get(); ?>authors/view/<?php echo $post->author->id; ?>"><?php echo $post->author->name; ?></a></h2>-->
+<h3>by <a href="<?php echo PathToRoot::get(); ?>authors/view/<?php echo $post->author->id; ?>"><?php echo $post->author->name; ?></a></h3>
 
 <?php
 
