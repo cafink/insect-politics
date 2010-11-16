@@ -1,20 +1,28 @@
 <div class="author">
 
-	<h2>
-		<a href="<?php echo PathToRoot::get(); ?>authors/view/<?php echo $author->id; ?>">
-			<?php echo $author->name; ?>
-		</a>
-	</h2>
+	<?php
 
-	<a href="<?php echo PathToRoot::get(); ?>authors/view/<?php echo $author->id; ?>">
-		<img
-			src="<?php echo PathToRoot::get(); ?>images/authors/<?php echo $author->img; ?>"
-			width="<?php echo $GLOBALS['config']['author_img']['width']; ?>"
-			height="<?php echo $GLOBALS['config']['author_img']['height']; ?>"
-			alt="<?php echo $author->name; ?>"
-			class="photo"
-		/>
-	</a>
+		$name = $author->name;
+		$img  = '<img ' .
+			'src="' . PathToRoot::get() . 'images/authors/' . $author->img . '" ' .
+			'width="' . $GLOBALS['config']['author_img']['width'] . '" ' .
+			'height="' . $GLOBALS['config']['author_img']['height'] . '" ' .
+			'alt="' . $author->name . '" ' .
+			'class="photo" />';
+
+		// An author's name and image may or may not be links,
+		// depending on whether or not he's the only author.
+		if ($link) {
+			$a_tag = '<a href="' . PathToRoot::get() . 'authors/view/' . $author->id . '">';
+			$name = $a_tag . $name . '</a>';
+			$img  = $a_tag . $img  . '</a>';
+		}
+
+	?>
+
+	<h2><?php echo $name; ?></h2>
+
+	<?php echo $img; ?>
 
 	<p><?php echo $author->bio; ?></p>
 

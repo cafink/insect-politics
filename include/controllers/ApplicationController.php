@@ -37,6 +37,10 @@ class ApplicationController extends BaseController {
 			else
 				$author_view->assign('authors', AuthorTable()->find());
 
+			// An author's bio in the sidebar should not link to a list of his posts
+			// if he is the only author.
+			$author_view->assign('link', AuthorTable()->multiple());
+
 			$authors = $author_view->getOutput();
 		} else {
 			$authors = null;
