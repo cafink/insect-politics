@@ -52,8 +52,18 @@ class ApplicationController extends BaseController {
 
 		// Feeds
 		if ($params['show_feeds']) {
+
 			$feed_view = new TemplateView('feeds/_list.php');
+
+			// If an author or tag is specified,
+			// we want its feeds, as well.
+			if (isset($params['author']))
+				$feed_view->assign('author', $params['author']);
+			elseif (isset($params['tag']))
+				$feed_view->assign('tag', $params['tag']);
+
 			$feeds = $feed_view->getOutput();
+
 		} else {
 			$feeds = null;
 		}

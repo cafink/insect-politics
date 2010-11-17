@@ -29,6 +29,17 @@ class AuthorsController extends ApplicationController {
 		$this->page['title'] = $this->author->name;
 		$this->render();
 	}
+
+	// Feed of one author's posts
+	function feed ($coords) {
+
+		$this->author = AuthorTable()->get($coords['id']);
+		$this->posts = $this->author->posts;
+
+		$this->page['layout'] = false;
+		$this->render(array('file' => "feeds/{$coords['type']}.php"));
+
+	}
 }
 
 ?>

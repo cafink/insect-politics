@@ -30,6 +30,18 @@ class PostsController extends ApplicationController {
 		$this->render();
 	}
 
+	// Feed of all posts
+	function feed ($coords) {
+
+		$this->posts = PostTable()->find();
+
+		if (!AuthorTable()->multiple())
+			$this->author = AuthorTable()->find(array('first' => true));
+
+		$this->page['layout'] = false;
+		$this->render(array('file' => "feeds/{$coords['type']}.php"));
+
+	}
 }
 
 ?>
