@@ -19,6 +19,9 @@ class PostsController extends ApplicationController {
 		else
 			$this->post = PostTable()->find(array('fields' => 'short_name', 'values' => $coords['id'], 'first' => true));
 
+		if (empty($this->post))
+			$this->redirect('posts');
+
 		$this->comment_pending = isset($_GET['comment-pending']);
 
 		$comment_form_view = new TemplateView('comments/_form.php');
