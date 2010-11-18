@@ -5,7 +5,7 @@
 	<title>
 		<?php
 			if (isset($page['title']))
-				echo $page['title'] . ' | ';
+				echo strip_tags($page['title']) . ' | ';
 			echo $GLOBALS['config']['site_name'];
 		?>
 	</title>
