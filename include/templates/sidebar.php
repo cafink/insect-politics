@@ -4,7 +4,7 @@
 			echo $authors;
 
 		if ($show_feeds)
-			echo '<h2>Feed' . (count($GLOBALS['config']['feeds']) > 1 ? 's' : '' ) . '</h2>' . $feeds;
+			echo '<h2>Feeds</h2>' . $feeds;
 
 		if ($show_tags)
 			echo '<h2>Popular Tags</h2>' . $tags;

@@ -47,7 +47,7 @@ class ApplicationController extends BaseController {
 		}
 
 		// Make sure we have feeds to display in the first place.
-		if (!$GLOBALS['config']['feeds'])
+		if (!$GLOBALS['config']['feed'])
 			$params['show_feeds'] = false;
 
 		// Feeds
@@ -55,10 +55,17 @@ class ApplicationController extends BaseController {
 
 			$feed_view = new TemplateView('feeds/_list.php');
 
-			// If an author or tag is specified,
-			// we want its feeds, as well.
-			if (isset($params['author']))
-				$feed_view->assign('author', $params['author']);
+			// If there are multiple authors, we want feeds for the posts of each.
+			if (AuthorTable()->multiple()) {
+				if (isset($params['authors']))
+					$feed_view->assign('authors', $params['authors']);
+				elseif (isset($params['author']))
+					$feed_view->assign('author', $params['author']);
+			}
+
+			// If tags are specified, we want their feeds, as well.
+			if (isset($params['tags']))
+				$feed_view->assign('tags', $params['tags']);
 			elseif (isset($params['tag']))
 				$feed_view->assign('tag', $params['tag']);
 

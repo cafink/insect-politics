@@ -28,7 +28,10 @@ class PostsController extends ApplicationController {
 		$comment_form_view->assign('post', $this->post);
 		$this->comment_form = $comment_form_view->getOutput();
 
-		$this->page['sidebar'] = $this->sidebar(array('author' => $this->post->author));
+		$this->page['sidebar'] = $this->sidebar(array(
+			'author' => $this->post->author,
+			'tags'   => $this->post->tags
+		));
 		$this->page['title'] = $this->post->title;
 		$this->render();
 	}
@@ -42,7 +45,7 @@ class PostsController extends ApplicationController {
 			$this->author = AuthorTable()->find(array('first' => true));
 
 		$this->page['layout'] = false;
-		$this->render(array('file' => "feeds/{$coords['type']}.php"));
+		$this->render(array('file' => "feeds/{$GLOBALS['config']['feed']}.php"));
 
 	}
 }

@@ -34,7 +34,7 @@ class TagsController extends ApplicationController {
 			$this->author = AuthorTable()->find(array('first' => true));
 
 		$this->page['layout'] = false;
-		$this->render(array('file' => "feeds/{$coords['type']}.php"));
+		$this->render(array('file' => "feeds/{$GLOBALS['config']['feed']}.php"));
 
 	}
 }

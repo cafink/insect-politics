@@ -2,6 +2,8 @@
 
 include_once 'models/Comment.php';
 
+// @todo: Feed of comments?
+
 class CommentsController extends ApplicationController {
 
 	function add ($coords) {

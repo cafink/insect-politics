@@ -1,40 +1,43 @@
+<?php
+
+	if (isset($author))
+		$authors = array($author);
+	elseif (isset($authors) && !is_array($authors))
+		$authors = array($authors);
+
+	if (isset($tag))
+		$tags = array($tag);
+	if (isset($tags) && !is_array($tags))
+		$tags = array($tags);
+
+?>
+
 <div id="feed-list">
 
-	<?php if (isset($author) || isset($tag)) { ?>
-		<ul>
-			<li>
-				<?php
-					if (isset($author)) {
-						$type = 'author';
-						$id   = $author->id;
-						echo "{$author->name}'s posts";
-					} elseif (isset($tag)) {
-						$type = 'tag';
-						$id   = $tag->id;
-						echo "posts tagged &ldquo;{$tag->name}&rdquo;";
-					}
-				?>
-				<ul>
-					<?php
-						foreach ($GLOBALS['config']['feeds'] as $feed => $name)
-							echo '<li><a href="' . PathToRoot::get() . $type . 's/feed/' . $id . '/' . $feed . '">' . $name . '</a></li>';
-					?>
-				</ul>
-			</li>
-			<li>
-				all posts
+	<?php if (isset($authors)) { ?>
+		<ul id="author-feeds">
+			<?php foreach ($authors as $author) { ?>
+				<li>
+					<a href="<?php echo PathToRoot::get(); ?>authors/feed/<?php echo $author->id; ?>">
+						<?php echo $author->name; ?>'s posts
+					</a>
+				</li>
+			<?php } ?>
+		</ul>
 	<?php } ?>
 
-	<ul>
-		<?php
-			foreach ($GLOBALS['config']['feeds'] as $feed => $name)
-				echo '<li><a href="' . PathToRoot::get() . 'posts/feed/' . $feed . '">' . $name . '</a></li>';
-		?>
-	</ul>
+	<?php if (isset($tags)) { ?>
+		<ul id="tag-feeds">
+			<?php foreach ($tags as $tag) { ?>
+				<li>
+					<a href="<?php echo PathToRoot::get(); ?>tags/feed/<?php echo $tag->id; ?>">
+						posts tagged &ldquo;<?php echo $tag->name; ?>&rdquo;
+					</a>
+				</li>
+			<?php } ?>
+		</ul>
+	<?php } ?>
 
-	<?php
-		if (isset($author) || isset($tag))
-			echo '</li></ul>';
-	?>
+	<ul id="all-feeds"><li><a href="<?php echo PathToRoot::get(); ?>posts/feed">all posts</a></li></ul>
 
 </div>

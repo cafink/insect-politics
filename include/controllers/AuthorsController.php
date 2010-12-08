@@ -23,7 +23,7 @@ class AuthorsController extends ApplicationController {
 		$this->posts = $this->author->posts;
 
 		$this->page['layout'] = false;
-		$this->render(array('file' => "feeds/{$coords['type']}.php"));
+		$this->render(array('file' => "feeds/{$GLOBALS['config']['feed']}.php"));
 
 	}
 }

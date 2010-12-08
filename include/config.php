@@ -23,6 +23,7 @@ $config['site_name'] = 'Insect Politics';
  * @see http://pear.php.net/manual/en/package.database.db.intro-dsn.php
  */
 $config['dsn'] = "mysql://root:dleg2@localhost/blog";
+//$config['dsn'] = "mysql://mysqlbug:2m6i4s0@localhost/training_carl";
 
 /**
  * Unix Zoneinfo file
@@ -34,6 +35,7 @@ $config['dsn'] = "mysql://root:dleg2@localhost/blog";
 
 /**
  * Layout Files
+ * @todo: Mobile layout
  */
 $config['layouts'] = array();
 $config['layouts']['normal'] = 'layouts/normal.php';
@@ -60,8 +62,7 @@ $config['date_format'] = 'F jS, Y';
 // How posts and comments are timestamped in the database
 $config['timestamp_format'] = 'Y-m-d H:i:s';
 
-// Author images--"small" for the sidebar,
-// "large" for the author pages
+// Author images for the sidebar
 $config['author_img'] = array(
 	'width'  => 192,
 	'height' => 128
@@ -110,10 +111,7 @@ $config['snippet_marker'] = '{snip}';
 $config['sidebar_tag_limit'] = 3;
 $config['sidebar_comment_limit'] = 4;
 
-// Null for no feeds
-$config['feeds'] = array(
-	'rss'  => 'RSS',
-	'atom' => 'atom'
-);
+// "rss" or "atom," or null for no feed
+$config['feed'] = 'rss';
 
 ?>
