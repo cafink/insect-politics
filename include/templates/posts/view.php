@@ -11,7 +11,15 @@
 
 <h1><?php echo $post->title; ?></h1>
 
-<h3>by <a href="<?php echo PathToRoot::get(); ?>authors/view/<?php echo $post->author->id; ?>"><?php echo $post->author->name; ?></a></h3>
+<h3>
+	by
+	<?php
+		$name = $post->author->name;
+		if ($link)
+			$name = '<a href="' . PathToRoot::get() . 'authors/view/' . $post->author->id . '">' . $name . '</a>';
+		echo $name;
+	?>
+</h3>
 
 <?php
 

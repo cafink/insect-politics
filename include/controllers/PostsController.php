@@ -28,6 +28,10 @@ class PostsController extends ApplicationController {
 		$comment_form_view->assign('post', $this->post);
 		$this->comment_form = $comment_form_view->getOutput();
 
+		// An author's name should not link to a list of his posts
+		// if he is the only author.
+		$this->link = AuthorTable()->multiple();
+
 		$this->page['sidebar'] = $this->sidebar(array(
 			'author' => $this->post->author,
 			'tags'   => $this->post->tags

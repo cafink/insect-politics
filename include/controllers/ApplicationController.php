@@ -47,7 +47,7 @@ class ApplicationController extends BaseController {
 		}
 
 		// Make sure we have feeds to display in the first place.
-		if (!$GLOBALS['config']['feed'])
+		if (is_null($GLOBALS['config']['feed']))
 			$params['show_feeds'] = false;
 
 		// Feeds

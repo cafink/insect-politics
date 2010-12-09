@@ -192,10 +192,16 @@ h1 a, h2 a {
 
 /* Images */
 
+.image {
+	margin-left: auto;
+	margin-right: auto;
+}
+
 .caption {
 	color: #888888;
 	font-style: italic;
 	font-size: 80%;
+	text-align: center;
 }
 
 .caption i, .caption em {
