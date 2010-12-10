@@ -197,18 +197,15 @@ h1 a, h2 a {
 	margin-left: auto;
 	margin-right: auto;
 	text-align: center;
-}
-
-.image img {
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
+	line-height: 0;
 }
 
 .caption {
 	color: #888888;
 	font-style: italic;
 	font-size: 80%;
+	line-height: normal;
+	margin-top: 0.25em;
 }
 
 .caption i, .caption em {
