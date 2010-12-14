@@ -16,14 +16,16 @@
 			$email_text = 'e-mail address';
 			if (!$GLOBALS['config']['comment_display_email'])
 				$email_text .= ' <span class="note">(will not be displayed publicly)</span>';
-
 			echo FormHelper::label(array('name' => 'email', 'text' => $email_text . ':'));
 			echo FormHelper::text(array('name' => 'email'));
 
 			echo FormHelper::label(array('name' => 'homepage', 'text' => 'homepage:'));
 			echo FormHelper::text(array('name' => 'homepage'));
 
-			echo FormHelper::label(array('name' => 'body', 'text' => 'comment:'));
+			$comment_text = 'comment';
+			if (!is_null($GLOBALS['config']['comment_html']))
+				$comment_text .= ' <span class="note">(you may use HTML tags for style)</span>';
+			echo FormHelper::label(array('name' => 'body', 'text' => $comment_text . ':'));
 			echo FormHelper::textarea(array('name' => 'body', 'rows' => 8, 'cols' => 40));
 
 			echo FormHelper::hidden(array('name' => 'post_id', 'value' => $post->id));

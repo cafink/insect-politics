@@ -190,6 +190,12 @@ h1 a, h2 a {
 	color: #333333;
 }
 
+#comments .comment blockquote {
+	margin: 0 40px;
+	padding-left: 0.5em;
+	border-left: 0.25em solid #000000;
+}
+
 /* Images */
 
 .image {

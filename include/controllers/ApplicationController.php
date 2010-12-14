@@ -99,7 +99,7 @@ class ApplicationController extends BaseController {
 			$comment_view->assign('comments', CommentTable()->scope('approved')->find(array(
 				'page'            => 1,
 				'per_page'        => $GLOBALS['config']['sidebar_comment_limit'],
-				'sort_fields'     => 'created',
+				'sort_fields'     => 'timestamp',
 				'sort_directions' => 'DESC',
 			)));
 			$comments = $comment_view->getOutput();

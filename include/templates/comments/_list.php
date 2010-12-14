@@ -21,7 +21,7 @@
 				</div>
 
 				<div class="content"><?php
-					echo htmlentities($comment->snippet);
+					echo is_null($GLOBALS['config']['comment_html']) ? htmlentities($comment->snippet) : strip_tags($comment->snippet, $GLOBALS['config']['comment_html']);
 					if (strlen($comment->body) > strlen($comment->snippet))
 						echo '&hellip;';
 				?></div>

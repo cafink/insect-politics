@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS `authors` (
 	`id` int(11) NOT NULL AUTO_INCREMENT,
-	`updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,	
+	`updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	`created` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
 	`name` varchar(255) NOT NULL,
 	`email` varchar(255) NOT NULL,
@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
 	`name` varchar(255) DEFAULT NULL,
 	`email` varchar(255) DEFAULT NULL,
 	`homepage` varchar(255) DEFAULT NULL,
-	`ip` varchar(255) NOT NULL DEFAULT '10.0.0.0',
+	`ip` varchar(255) DEFAULT NULL,
 	`body` text NOT NULL,
 	`timestamp` timestamp NOT NULL,
 	`status` enum('pending','approved','rejected') NOT NULL,
