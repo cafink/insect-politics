@@ -1,3 +1,5 @@
+<!-- @todo: Javascript validation -->
+
 <div id="comment-form">
 
 	<h4>Add a Comment</h4>
@@ -6,7 +8,7 @@
 
 		if (!empty($error_content)) echo '<div class=\'errorlistview\'>' . $error_content . '</div>';
 
-		echo FormHelper::form_open(array('action' => 'comments/add/' . $post->id));
+		echo FormHelper::form_open(array('action' => 'comments/add/' . $post->id . '#comment-form'));
 
 			echo '<fieldset>';
 

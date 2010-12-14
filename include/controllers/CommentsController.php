@@ -3,6 +3,7 @@
 include_once 'models/Comment.php';
 
 // @todo: Feed of comments?
+// @todo: Allow users to preview their comment before submission
 
 class CommentsController extends ApplicationController {
 
@@ -26,7 +27,7 @@ class CommentsController extends ApplicationController {
 				else
 					$append = '#comment-' . $comment->id;
 
-				header('Location: ' . PathToRoot::get() . 'posts/view/' . $this->post->id . $append);
+				$this->redirect('posts/view/' . $this->post->id . $append);
 				die();
 			} else {
 				$errors = $comment->getErrors();
@@ -39,6 +40,7 @@ class CommentsController extends ApplicationController {
 		$comment_form_view = new TemplateView('comments/_form.php');
 		$comment_form_view->assign('post', $this->post);
 		$comment_form_view->assign('errors', $errors);
+		$comment_form_view->assign('defaults', $_POST);
 		$comment_form_view->assign('error_content', $error_content);
 		$this->comment_form = $comment_form_view->getOutput();
 
