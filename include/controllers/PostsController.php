@@ -52,6 +52,19 @@ class PostsController extends ApplicationController {
 		$this->render(array('file' => "feeds/{$GLOBALS['config']['feed']}.php"));
 
 	}
+
+	// This doesn't seem like the ideal place for this search function
+	// (after all, it doesn't search only posts), but it's as good as any.
+	// Or should there be a dedicated search controller?
+	function search ($coords) {
+		// Just redirect to Google using the "site:" operator
+		// @todo: Add real search support
+		$this->redirect(
+			!empty($_POST['search_terms']) ?
+			'http://www.google.com/search?q=' . urlencode($_POST['search_terms']) . '+site:' . $_SERVER['HTTP_HOST'] . PathToRoot::get() :
+			'posts'
+		);
+	}
 }
 
 ?>

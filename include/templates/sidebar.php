@@ -3,6 +3,9 @@
 		if ($show_authors)
 			echo $authors;
 
+		if ($show_search)
+			echo '<h2>Search</h2>' . $search;
+
 		if ($show_feeds)
 			echo '<h2>Feeds</h2>' . $feeds;
 

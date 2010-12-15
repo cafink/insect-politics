@@ -33,7 +33,7 @@
 
 			if (!empty($author->facebook_username)) {
 
-				// @todo:  There must be a better way to handle this logic!
+				// @todo: There must be a better way to handle this logic!
 				$class = 'first';
 				if (empty($author->twitter_username))
 					$class .= ' last';

@@ -9,6 +9,8 @@ class ApplicationController extends BaseController {
 		// Default values
 		if (!isset($params['show_authors']))
 			$params['show_authors'] = true;
+		if (!isset($params['show_search']))
+			$params['show_search'] = true;
 		if (!isset($params['show_feeds']))
 			$params['show_feeds'] = true;
 		if (!isset($params['show_tags']))
@@ -44,6 +46,12 @@ class ApplicationController extends BaseController {
 			$authors = $author_view->getOutput();
 		} else {
 			$authors = null;
+		}
+
+		// Search
+		if ($params['show_search']) {
+			$search_view = new TemplateView('_search.php');
+			$search = $search_view->getOutput();
 		}
 
 		// Make sure we have feeds to display in the first place.
@@ -111,6 +119,8 @@ class ApplicationController extends BaseController {
 
 		$view->assign('show_authors', $params['show_authors']);
 		$view->assign('authors', $authors);
+		$view->assign('show_search', $params['show_search']);
+		$view->assign('search', $search);
 		$view->assign('show_feeds', $params['show_feeds']);
 		$view->assign('feeds', $feeds);
 		$view->assign('show_tags', $params['show_tags']);
