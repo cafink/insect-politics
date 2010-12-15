@@ -51,16 +51,16 @@ INSERT INTO `posts_tags_map` (`id`, `updated`, `created`, `post_id`, `tag_id`) V
 (10, NOW(), NOW(), 8, 8),
 (11, NOW(), NOW(), 9, 1),
 (12, NOW(), NOW(), 10, 1),
-(13, NOW(), NOW(), 10, 9),
-(14, NOW(), NOW(), 11, 10),
+(13, NOW(), NOW(), 10, 3),
+(14, NOW(), NOW(), 11, 9),
 (15, NOW(), NOW(), 12, 2),
-(16, NOW(), NOW(), 13, 11),
-(17, NOW(), NOW(), 14, 10),
+(16, NOW(), NOW(), 13, 10),
+(17, NOW(), NOW(), 14, 9),
 (18, NOW(), NOW(), 15, 6),
 (19, NOW(), NOW(), 15, 8),
-(20, NOW(), NOW(), 16, 10),
-(21, NOW(), NOW(), 17, 12),
-(22, NOW(), NOW(), 18, 10),
+(20, NOW(), NOW(), 16, 9),
+(21, NOW(), NOW(), 17, 11),
+(22, NOW(), NOW(), 18, 9),
 (23, NOW(), NOW(), 19, 6);
 
 INSERT INTO `tags` (`id`, `updated`, `created`, `name`) VALUES
@@ -72,7 +72,6 @@ INSERT INTO `tags` (`id`, `updated`, `created`, `name`) VALUES
 (6, NOW(), NOW(), 'science'),
 (7, NOW(), NOW(), 'liberty'),
 (8, NOW(), NOW(), 'religion'),
-(9, NOW(), NOW(), 'reviews'),
-(10, NOW(), NOW(), 'television'),
-(11, NOW(), NOW(), 'grammar'),
-(12, NOW(), NOW(), 'books');
+(9, NOW(), NOW(), 'television'),
+(10, NOW(), NOW(), 'grammar'),
+(11, NOW(), NOW(), 'books');
