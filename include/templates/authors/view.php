@@ -3,7 +3,7 @@
 <div id="author-posts">
 	<?php
 		foreach ($posts as $post)
-			include 'templates/posts/_post.php';
+			echo $post;
 		echo $pager_html;
 	?>
 </div>

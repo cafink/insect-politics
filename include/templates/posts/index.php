@@ -1,7 +1,7 @@
 <div id="posts">
 	<?php
 		foreach ($posts as $post)
-			include '_post.php';
+			echo $post;
 		echo $pager_html;
 	?>
 </div>

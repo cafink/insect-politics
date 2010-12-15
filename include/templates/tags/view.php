@@ -2,7 +2,7 @@
 <div id="posts">
 	<?php
 		foreach ($tag->posts as $post)
-			include 'include/templates/posts/_post.php';
+			echo $post;
 		echo $pager_html;
 	?>
 </div>

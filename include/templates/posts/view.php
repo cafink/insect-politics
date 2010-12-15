@@ -55,9 +55,7 @@
 		echo '</div>';
 	}
 
-	if ($GLOBALS['config']['show_comments']) {
-		$comments = $post->comments;
-		include 'include/templates/comments/_comments.php';
-	}
+	if ($GLOBALS['config']['show_comments'])
+		echo $comments;
 
 ?>

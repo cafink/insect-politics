@@ -6,7 +6,14 @@ class PostsController extends ApplicationController {
 
 	function index ($coords) {
 
-		list($this->posts, $this->pager_html) = $this->paginate('Post');
+		list($all_posts, $this->pager_html) = $this->paginate('Post');
+
+		$this->posts = array();
+		foreach($all_posts as $post) {
+			$post_view = new TemplateView('posts/_post.php');
+			$post_view->assign('post', $post);
+			$this->posts[] = $post_view->getOutput();
+		}
 
 		$this->page['sidebar'] = $this->sidebar();
 		$this->render();
@@ -22,15 +29,30 @@ class PostsController extends ApplicationController {
 		if (empty($this->post))
 			$this->redirect('posts');
 
-		$this->comment_pending = isset($_GET['comment-pending']);
-
-		$comment_form_view = new TemplateView('comments/_form.php');
-		$comment_form_view->assign('post', $this->post);
-		$this->comment_form = $comment_form_view->getOutput();
-
 		// An author's name should not link to a list of his posts
 		// if he is the only author.
 		$this->link = AuthorTable()->multiple();
+
+		if ($GLOBALS['config']['show_comments']) {
+
+			$comments = $this->post->comments;
+			$comment_views = array();
+			foreach ($comments as $comment) {
+				$comment_view = new TemplateView('comments/_comment.php');
+				$comment_view->assign('comment', $comment);
+				$comment_view->assign('link', $this->link);
+				$comment_views[] = $comment_view->getOutput();
+			}
+
+			$comment_form_view = new TemplateView('comments/_form.php');
+			$comment_form_view->assign('post', $this->post);
+
+			$comments_view = new TemplateView('comments/_comments.php');
+			$comments_view->assign('comments', $comment_views);
+			$comments_view->assign('comment_pending', isset($_GET['comment-pending']));
+			$comments_view->assign('comment_form', $comment_form_view->getOutput());
+			$this->comments = $comments_view->getOutput();
+		}
 
 		$this->page['sidebar'] = $this->sidebar(array(
 			'author' => $this->post->author,

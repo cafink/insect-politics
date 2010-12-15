@@ -14,7 +14,7 @@
 			echo '<p>No comments have yet been posted.</p>';
 		} else {
 			foreach ($comments as $comment)
-				include 'include/templates/comments/_comment.php';
+				echo $comment;
 		}
 	?>
 </div>

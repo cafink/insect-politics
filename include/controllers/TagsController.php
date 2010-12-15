@@ -17,7 +17,15 @@ class TagsController extends ApplicationController {
 
 		$this->tag = TagTable()->get($coords['id']);
 
-		list($this->tag->posts, $this->pager_html) = $this->paginate(PostTable()->tagScope($coords['id']));
+		list($tag_posts, $this->pager_html) = $this->paginate(PostTable()->tagScope($coords['id']));
+
+		$this->tag->posts = array();
+		foreach($tag_posts as $post) {
+			$post_view = new TemplateView('posts/_post.php');
+			$post_view->assign('post', $post);
+			$this->tag->posts[] = $post_view->getOutput();
+		}
+
 
 		$this->page['sidebar'] = $this->sidebar(array('tag' => $this->tag));
 		$this->page['title'] = $this->tag->name;

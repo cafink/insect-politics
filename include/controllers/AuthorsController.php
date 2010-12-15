@@ -9,7 +9,14 @@ class AuthorsController extends ApplicationController {
 		$this->author = AuthorTable()->get($coords['id']);
 
 		// We already have $this->author->posts, but we can't as easily paginate that.
-		list($this->posts, $this->pager_html) = $this->paginate('Post', 'author_id = ?', array($coords['id']));
+		list($author_posts, $this->pager_html) = $this->paginate('Post', 'author_id = ?', array($coords['id']));
+
+		$this->posts = array();
+		foreach($author_posts as $post) {
+			$post_view = new TemplateView('posts/_post.php');
+			$post_view->assign('post', $post);
+			$this->posts[] = $post_view->getOutput();
+		}
 
 		$this->page['sidebar'] = $this->sidebar(array('author' => $this->author));
 		$this->page['title'] = $this->author->name;

@@ -30,14 +30,23 @@ class ApplicationController extends BaseController {
 
 			$author_view = new TemplateView($author_file);
 
-			if (!AuthorTable()->multiple())
+			if (!AuthorTable()->multiple()) {
 				$author_view->assign('author', AuthorTable()->find(array('first' => true)));
-			elseif (isset($params['author']))
+			} elseif (isset($params['author'])) {
 				$author_view->assign('author', $params['author']);
-			elseif (isset($params['author_id']))
+			} elseif (isset($params['author_id'])) {
 				$author_view->assign('author', AuthorTable()->get($params['author_id']));
-			else
-				$author_view->assign('authors', AuthorTable()->find());
+			} else {
+				$authors = AuthorTable()->find();
+				$author_views = array();
+				foreach ($authors as $author) {
+					$single_view = new TemplateView('authors/_info.php');
+					$single_view->assign('author', $author);
+					$single_view->assign('link', true);
+					$author_views[] = $single_view->getOutput();
+				}
+				$author_view->assign('authors', $author_views);
+			}
 
 			// An author's bio in the sidebar should not link to a list of his posts
 			// if he is the only author.
@@ -52,6 +61,8 @@ class ApplicationController extends BaseController {
 		if ($params['show_search']) {
 			$search_view = new TemplateView('_search.php');
 			$search = $search_view->getOutput();
+		} else {
+			$search = null;
 		}
 
 		// Make sure we have feeds to display in the first place.
