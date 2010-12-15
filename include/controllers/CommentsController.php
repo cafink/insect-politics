@@ -19,6 +19,7 @@ class CommentsController extends ApplicationController {
 			$comment = new Comment($_POST);
 
 			if ($comment->save()) {
+				// @todo: Check whether special characters need escaping here
 				$message = 'A reader has commented on the post "' . $this->post->title . '" (http' . (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on') ? 's' : '' ) . "://". $_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME']) . '/posts/view/' . $this->post->id . '#comment-' . $comment->id . ').';
 				mail($this->post->author->email, 'New Comment', $message, "From: webmaster@{$_SERVER['HTTP_HOST']}");
 
