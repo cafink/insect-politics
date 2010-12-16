@@ -40,6 +40,29 @@ class Post extends BaseRow {
 		return $errors;
 	}
 
+	// Return a list of all the months for which posts exist.
+	// Used for the sidebar "archive" feature.
+	function monthList () {
+
+		// We could determine the first & last month, too,
+		// but then we'd have to handle the first & last years as special cases.
+		// It's simpler to just iterate over all 12 months for every year.
+		$last_year  = date('Y');
+		$first_year  = date('Y', strtotime($this->find(array('order_by' => 'timestamp ASC', 'first' => true))->timestamp));
+
+		$month_list = array();
+
+		for ($year = $last_year; $year >= $first_year; $year--) {
+			for ($month = 12; $month >= 1; $month--) {
+				$posts = $this->find(array('where' => "timestamp LIKE '" . $year . '-' . sprintf("%02d", $month) . "%'"));
+				if (!empty($posts))
+					$month_list[] = $year . '/' . $month;
+			}
+		}
+
+		return $month_list;
+	}
+
 	function callbackAfterFetch () {
 
 		// @todo: Think of a better way to handle images in posts.
