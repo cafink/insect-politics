@@ -2,6 +2,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+	<?php
+
+		if (isset($page['description']))
+			echo '<meta name="description" content="' . $page['description'] . '" />';
+
+		if (isset($page['keywords'])) {
+			if (is_array($page['keywords']))
+				$page['keywords'] = implode(', ', $page['keywords']);
+			echo '<meta name="keywords" content="' . $page['keywords'] . '" />';
+		}
+
+	?>
 	<title>
 		<?php
 			if (isset($page['title']))
