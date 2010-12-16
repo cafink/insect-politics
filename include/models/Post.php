@@ -35,6 +35,19 @@ class Post extends BaseRow {
 		return $this->scope(array('where' => "id IN (SELECT {$this->associations['tags']->local_key} FROM {$this->associations['tags']->table} WHERE {$this->associations['tags']->remote_key} = ?)", 'params' => array($tag_id)));
 	}
 
+	function monthScope ($year, $month) {
+
+		// Accept parameters in either order.
+		if (strlen($year) == 2 && strlen($month) == 4)
+			// One-line variable swap.  Thanks, Optimus Pete (tech.petegraham.co.uk)!
+			list($year, $month) = array($month, $year);
+
+		$year  = sprintf("%04d", $year);
+		$month = sprintf("%02d", $month);
+
+		return $this->scope(array('where' => "timestamp LIKE '{$year}-{$month}%'"));
+	}
+
 	function validate ($type) {
 		$errors = array();
 		return $errors;
@@ -44,21 +57,22 @@ class Post extends BaseRow {
 	// Used for the sidebar "archive" feature.
 	function monthList () {
 
-		// We could determine the first & last month, too,
-		// but then we'd have to handle the first & last years as special cases.
-		// It's simpler to just iterate over all 12 months for every year.
-		$last_year  = date('Y');
-		$first_year  = date('Y', strtotime($this->find(array('order_by' => 'timestamp ASC', 'first' => true))->timestamp));
+		$posts = $this->find();
 
 		$month_list = array();
-
-		for ($year = $last_year; $year >= $first_year; $year--) {
-			for ($month = 12; $month >= 1; $month--) {
-				$posts = $this->find(array('where' => "timestamp LIKE '" . $year . '-' . sprintf("%02d", $month) . "%'"));
-				if (!empty($posts))
-					$month_list[] = $year . '/' . $month;
-			}
+		foreach ($posts as $post) {
+			$time_parts = explode('-', $post->timestamp);
+			$month_list[] = $time_parts[0] . '/' . $time_parts[1];
 		}
+
+		$month_list = array_unique($month_list);
+
+		// Start with the most recent and go backwards.
+		// We could probably just sort the posts by date when we call find() above,
+		// but we subsequently manipulate the array, and will have gaps in the indeces
+		// because of array_unique().  That shouldn't matter in practice, but let's
+		// keep things organized, anyway.
+		rsort($month_list);
 
 		return $month_list;
 	}

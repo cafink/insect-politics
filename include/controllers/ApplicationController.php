@@ -13,12 +13,12 @@ class ApplicationController extends BaseController {
 			$params['show_search'] = true;
 		if (!isset($params['show_feeds']))
 			$params['show_feeds'] = true;
-		if (!isset($params['show_archive']))
-			$params['show_archive'] = true;
 		if (!isset($params['show_tags']))
 			$params['show_tags'] = true;
 		if (!isset($params['show_comments']))
 			$params['show_comments'] = true;
+		if (!isset($params['show_archive']))
+			$params['show_archive'] = true;
 
 		// Author(s)
 		if ($params['show_authors']) {
@@ -96,15 +96,6 @@ class ApplicationController extends BaseController {
 			$feeds = null;
 		}
 
-		// Archive
-		if ($params['show_archive']) {
-			$archive_view = new TemplateView('posts/_archive.php');
-			$archive_view->assign('months', PostTable()->monthList());
-			$archive = $archive_view->getOutput();
-		} else {
-			$archive = null;
-		}
-
 		// Tags
 		if ($params['show_tags']) {
 			$tag_view = new TemplateView('tags/_list.php');
@@ -137,6 +128,15 @@ class ApplicationController extends BaseController {
 			$comments = null;
 		}
 
+		// Archive
+		if ($params['show_archive']) {
+			$archive_view = new TemplateView('posts/_archive_list.php');
+			$archive_view->assign('months', PostTable()->monthList());
+			$archive = $archive_view->getOutput();
+		} else {
+			$archive = null;
+		}
+
 		$view = new TemplateView('sidebar.php');
 
 		$view->assign('show_authors', $params['show_authors']);
@@ -145,12 +145,12 @@ class ApplicationController extends BaseController {
 		$view->assign('search', $search);
 		$view->assign('show_feeds', $params['show_feeds']);
 		$view->assign('feeds', $feeds);
-		$view->assign('show_archive', $params['show_archive']);
-		$view->assign('archive', $archive);
 		$view->assign('show_tags', $params['show_tags']);
 		$view->assign('tags', $tags);
 		$view->assign('show_comments', $params['show_comments']);
 		$view->assign('comments', $comments);
+		$view->assign('show_archive', $params['show_archive']);
+		$view->assign('archive', $archive);
 		return $view->getOutput();
 	}
 }
