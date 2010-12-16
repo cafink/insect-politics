@@ -2,7 +2,7 @@
 
 <div id="comment-form">
 
-	<h4>Add a Comment</h4>
+	<h3>Add a Comment</h3>
 
 	<?php
 

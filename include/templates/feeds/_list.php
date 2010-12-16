@@ -14,6 +14,8 @@
 
 <div id="feed-list">
 
+	<h2>Feeds</h2>
+
 	<?php if (isset($authors)) { ?>
 		<ul id="author-feeds">
 			<?php foreach ($authors as $author) { ?>

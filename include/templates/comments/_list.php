@@ -1,4 +1,7 @@
 <div id="comment-list">
+
+	<h2>Recent Comments</h2>
+
 	<ul>
 		<?php foreach ($comments as $comment) { ?>
 			<li class="comment">
@@ -29,4 +32,5 @@
 			</li>
 		<?php } ?>
 	</ul>
+
 </div>

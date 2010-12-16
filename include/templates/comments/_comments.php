@@ -1,6 +1,6 @@
 <div id="comments">
 
-	<h3>Comments</h3>
+	<h2>Comments</h2>
 
 	<?php if($comment_pending) { ?>
 		<div class="message">

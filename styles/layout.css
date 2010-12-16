@@ -5,6 +5,11 @@
 	margin-bottom: 2em;
 }
 
+#logo {
+	font-size: 300%;
+	font-weight: bold;
+}
+
 #footer {
 	text-align: center;
 	clear: both;
@@ -14,15 +19,15 @@
 /* Body & Content */
 
 body {
-	margin: 4em;
+	margin: 4em; /* Should probably change this to a percent */
 	font-family: Georgia, "Times New Roman", serif;
 }
 
-h1, h2 {
+h1, h2, #logo {
 	font-family: Rockwell, Arial, Verdana, sans-serif;
 }
 
-h1 a, h2 a {
+h1 a, h2 a, #logo a {
 	text-decoration: none;
 }
 
@@ -43,9 +48,13 @@ h1 a, h2 a {
 	width: 100%;
 }
 
-#content h1, #content h2, #content h3 {
+#content h1, #content #post h1, #content h2, #content h3 {
 	margin: 0;
 	padding: 0;
+}
+
+#content h1 {
+	margin-bottom: 1em;
 }
 
 .note {
@@ -84,10 +93,12 @@ h1 a, h2 a {
 	margin-bottom: 2em;
 }
 
-/* Authors */
+.post .byline {
+	font-weight: bold;
+}
 
-#author-posts {
-	padding-top: 2.5em;
+.post .timestamp {
+	font-style: italic;
 }
 
 /* Sidebar */
@@ -216,10 +227,6 @@ h1 a, h2 a {
 }
 
 /* Tags */
-
-#tags {
-	margin-top: 2em;
-}
 
 #tags ul {
 	float: left;

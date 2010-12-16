@@ -1,24 +1,24 @@
+<?php
+
+	$name = $author->name;
+	$img  = '<img ' .
+		'src="' . PathToRoot::get() . 'images/authors/' . $author->img . '" ' .
+		'width="' . $GLOBALS['config']['author_img']['width'] . '" ' .
+		'height="' . $GLOBALS['config']['author_img']['height'] . '" ' .
+		'alt="' . $author->name . '" ' .
+		'class="photo" />';
+
+	// An author's name and image may or may not be links,
+	// depending on whether or not he's the only author.
+	if ($link) {
+		$a_tag = '<a href="' . PathToRoot::get() . 'authors/view/' . $author->id . '">';
+		$name = $a_tag . $name . '</a>';
+		$img  = $a_tag . $img  . '</a>';
+	}
+
+?>
+
 <div class="author">
-
-	<?php
-
-		$name = $author->name;
-		$img  = '<img ' .
-			'src="' . PathToRoot::get() . 'images/authors/' . $author->img . '" ' .
-			'width="' . $GLOBALS['config']['author_img']['width'] . '" ' .
-			'height="' . $GLOBALS['config']['author_img']['height'] . '" ' .
-			'alt="' . $author->name . '" ' .
-			'class="photo" />';
-
-		// An author's name and image may or may not be links,
-		// depending on whether or not he's the only author.
-		if ($link) {
-			$a_tag = '<a href="' . PathToRoot::get() . 'authors/view/' . $author->id . '">';
-			$name = $a_tag . $name . '</a>';
-			$img  = $a_tag . $img  . '</a>';
-		}
-
-	?>
 
 	<h2><?php echo $name; ?></h2>
 

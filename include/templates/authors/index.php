@@ -1,6 +1,7 @@
-<h1>Authors</h1>
-
 <div id="authors">
+
+	<h1>Authors</h1>
+
 	<?php foreach ($authors as $author) { ?>
 
 		<h2><?php echo $author->name; ?></h2>

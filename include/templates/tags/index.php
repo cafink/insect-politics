@@ -1,6 +1,7 @@
-<h1>Tags</h1>
-
 <div id="tags">
+
+	<h1>Tags</h1>
+
 	<?php
 
 		$num_long_cols = count($tags) % $GLOBALS['config']['tag_columns'];
@@ -27,4 +28,5 @@
 			echo '</ul>';
 		}
 	?>
+
 </div>

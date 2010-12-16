@@ -1,11 +1,12 @@
 <div class="post">
+
 	<?php
 		echo '<h2><a href="' . PathToRoot::get() . 'posts/view/' . $post->id . '">' . $post->title . '</a></h2>';
 
 		if (AuthorTable()->multiple())
-			echo '<h3>by <a href="' . PathToRoot::get() . 'authors/view/' . $post->author->id . '">' . $post->author->name . '</a></h3>';
+			echo '<div class="byline">by <a href="' . PathToRoot::get() . 'authors/view/' . $post->author->id . '">' . $post->author->name . '</a></div>';
 
-		echo '<h3>' . date($GLOBALS['config']['date_format'], strtotime($post->timestamp)) . '</h3>';
+		echo '<div class="timestamp">' . date($GLOBALS['config']['date_format'], strtotime($post->timestamp)) . '</div>';
 
 		echo '<div class="body' . (($GLOBALS['config']['use_snippets'] && $post->has_snippet) ? ' snippet' : '') . '">' . (($GLOBALS['config']['use_snippets'] && $post->has_snippet) ? $post->snippet : $post->body) . '</div>';
 
@@ -18,4 +19,5 @@
 			echo '</div>';
 		}
 	?>
+
 </div>
