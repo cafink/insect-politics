@@ -115,6 +115,9 @@ $config['snippet_marker'] = '{snip}';
 $config['sidebar_tag_limit'] = 3;
 $config['sidebar_comment_limit'] = 4;
 
+// Number of columns in which to display tags on tag index page
+$config['tag_columns'] = 3;
+
 // "rss" or "atom," or null for no feed
 $config['feed'] = 'rss';
 

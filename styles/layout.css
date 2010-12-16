@@ -221,6 +221,11 @@ h1 a, h2 a {
 	margin-top: 2em;
 }
 
+#tags ul {
+	float: left;
+	min-width: 11em;
+}
+
 #post-tags {
 	margin: 2em 0;
 }
