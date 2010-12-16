@@ -22,8 +22,10 @@ $config['site_name'] = 'Insect Politics';
  * @var string DSN formatted for PEAR's DB
  * @see http://pear.php.net/manual/en/package.database.db.intro-dsn.php
  */
-$config['dsn'] = "mysql://root:dleg2@localhost/blog";
-//$config['dsn'] = "mysql://mysqlbug:2m6i4s0@localhost/training_carl";
+// Allows the site to work on proto. Remember to remove this later!
+$config['dsn'] = strpos($_SERVER['HTTP_HOST'], 'mudbugmedia.com') !== FALSE ?
+                 "mysql://mysqlbug:2m6i4s0@localhost/training_carl" :
+                 "mysql://root:dleg2@localhost/blog";
 
 /**
  * Unix Zoneinfo file
