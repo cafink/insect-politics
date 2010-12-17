@@ -82,7 +82,7 @@ class Post extends BaseRow {
 		// @todo: Think of a better way to handle images in posts.
 		$this->body = str_replace(
 			'<img src="',
-			'<img src="' . PathToRoot::get() . "images/posts/" . $this->short_name . '/', // Why the double quotes?
+			'<img src="' . PathToRoot::get() . 'images/posts/' . $this->short_name . '/',
 			$this->body
 		);
 
