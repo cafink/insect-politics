@@ -48,7 +48,7 @@
 				if ($last)
 					$class .= ' last';
 
-				// Zero-width space (&#8203;) used to separate words,
+				// Zero-width space (&#8203;) used to separate words (instead of no space),
 				// so that the text-transform: capitalize; style may be applied.
 				echo '<a href="' . PathToRoot::get() . 'tags/view/' . $tag->id . '" class="' . $class . '">' . $tag->name . '</a>&#8203;';
 				$first = false;
@@ -56,10 +56,11 @@
 
 			echo '</div>';
 		}
-
-		if ($GLOBALS['config']['show_comments'])
-			echo $comments;
-
 	?>
 
 </div>
+
+<?php
+	if ($GLOBALS['config']['show_comments'])
+		echo $comments;
+?>
