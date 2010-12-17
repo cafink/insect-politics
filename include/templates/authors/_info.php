@@ -27,7 +27,7 @@
 	<p><?php echo $author->bio; ?></p>
 
 	<?php
-		if (!empty($author->facebook_username) || !empty($author->twitter_username)) {
+		if ($author->social_media) {
 
 			echo '<div class="social-media">';
 

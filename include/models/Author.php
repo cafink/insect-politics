@@ -25,8 +25,12 @@ class Author extends BaseRow {
 	// Right now, that just requires a simple rowCount(), but it might be
 	// trickier later (by the addition of an "active" field, for example),
 	// hence this dedicated function.
-	function multiple() {
+	function multiple () {
 		return $this->rowCount() > 1;
+	}
+
+	function callbackAfterFetch () {
+		$this->social_media = !empty($this->facebook_username) || !empty($this->twitter_username);
 	}
 }
 
