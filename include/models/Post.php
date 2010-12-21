@@ -79,6 +79,11 @@ class Post extends BaseRow {
 
 	function callbackAfterFetch () {
 
+		// Used for putting tags into the Keywords meta tag
+		$this->tag_list = array();
+		foreach ($this->tags as $tag)
+			$this->tag_list[] = $tag->name;
+
 		// @todo: Think of a better way to handle images in posts.
 		$this->body = str_replace(
 			'<img src="',

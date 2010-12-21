@@ -59,6 +59,7 @@ class PostsController extends ApplicationController {
 			'tags'   => $this->post->tags
 		));
 		$this->page['title'] = $this->post->title;
+		$this->page['keywords'] = $this->post->tag_list;
 		$this->render();
 	}
 

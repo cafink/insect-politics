@@ -26,9 +26,9 @@ class TagsController extends ApplicationController {
 			$this->tag->posts[] = $post_view->getOutput();
 		}
 
-
 		$this->page['sidebar'] = $this->sidebar(array('tag' => $this->tag));
 		$this->page['title'] = $this->tag->name;
+		$this->page['keywords'] = $this->tag->name;
 		$this->render();
 	}
 
