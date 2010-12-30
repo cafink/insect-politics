@@ -54,27 +54,36 @@ class Post extends BaseRow {
 	}
 
 	// Return a list of all the months for which posts exist.
-	// Used for the sidebar "archive" feature.
-	function monthList () {
+	// Format: array(year => array(month => post_count))
+	function yearMonthList () {
 
 		$posts = $this->find();
 
-		$month_list = array();
-		foreach ($posts as $post) {
-			$time_parts = explode('-', $post->timestamp);
-			$month_list[] = $time_parts[0] . '/' . $time_parts[1];
-		}
+		$years = array();
 
-		$month_list = array_unique($month_list);
+		foreach ($posts as $post) {
+
+			$time_parts = explode('-', $post->timestamp);
+
+			if (!isset($years[$time_parts[0]]))
+				$years[$time_parts[0]] = array();
+
+			if (!isset($years[$time_parts[0]][$time_parts[1]]))
+				$years[$time_parts[0]][$time_parts[1]] = 1;
+			else
+				$years[$time_parts[0]][$time_parts[1]] += 1;
+		}
 
 		// Start with the most recent and go backwards.
 		// We could probably just sort the posts by date when we call find() above,
 		// but we subsequently manipulate the array, and will have gaps in the indeces
 		// because of array_unique().  That shouldn't matter in practice, but let's
 		// keep things organized, anyway.
-		rsort($month_list);
+		krsort($years);
+		foreach ($years as $year)
+			krsort($year);
 
-		return $month_list;
+		return $years;
 	}
 
 	function callbackAfterFetch () {

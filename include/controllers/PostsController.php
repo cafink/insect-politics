@@ -63,29 +63,6 @@ class PostsController extends ApplicationController {
 		$this->render();
 	}
 
-	// Display all the posts for a given year & month
-	// @todo: Create a main archive index page, and link to it from the sidebar
-	// when there are too many entries (like how the sidebar tag list works).
-	// Right now, monthly archives are accessible only from the sidebar.
-	function archive ($coords) {
-
-		list($all_posts, $this->pager_html) = $this->paginate(PostTable()->monthScope($coords['year'], $coords['month']));
-
-		$this->posts = array();
-		foreach($all_posts as $post) {
-			$post_view = new TemplateView('posts/_post.php');
-			$post_view->assign('post', $post);
-			$this->posts[] = $post_view->getOutput();
-		}
-
-		// Is there a more efficient way to do this?
-		$this->year  = $coords['year'];
-		$this->month = $coords['month'];
-
-		$this->page['sidebar'] = $this->sidebar();
-		$this->render();
-	}
-
 	// Feed of all posts
 	function feed ($coords) {
 

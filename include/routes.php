@@ -25,7 +25,7 @@ $routes[] = new ChitinRoute('comments/add/:post_id', array('controller' => 'comm
 
 // Archive year/month URL
 // @todo: regex for year & month
-$routes[] = new ChitinRoute('posts/archive/:year/:month', array('controller' => 'posts', 'action' => 'archive'));
+$routes[] = new ChitinRoute('archive/view/:year/:month', array('controller' => 'archive', 'action' => 'view'));
 
 // Standard Chitin URLs
 $routes[] = new ChitinRoute(':controller/:action/:id', array(), array('action' => 'edit|delete|view|feed', 'id' => '\d+'));

@@ -27,7 +27,9 @@ class TagsController extends ApplicationController {
 		}
 
 		$this->page['sidebar'] = $this->sidebar(array('tag' => $this->tag));
-		$this->page['title'] = $this->tag->name;
+		// Tag names are capitalized using text-transform: capitalize; elsewhere,
+		// but that won't work for the page title.
+		$this->page['title'] = ucwords($this->tag->name);
 		$this->page['keywords'] = $this->tag->name;
 		$this->render();
 	}
