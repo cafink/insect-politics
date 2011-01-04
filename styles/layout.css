@@ -249,3 +249,10 @@ h1 a, h2 a, #logo a {
 	text-decoration: none;
 	text-transform: capitalize;
 }
+
+/* Archive */
+
+.archive-year {
+	float: left;
+	width: 14em;
+}

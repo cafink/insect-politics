@@ -4,11 +4,24 @@
 
 	<ul>
 		<?php
-			foreach ($months as $month)
-				// strtotime() can't figure out how to turn YYYY/MM into a timestamp,
-				// but it can YYYY/MM/DD, hence the "/01" at the end.
-				echo '<li><a href="' . PathToRoot::get() . 'archive/view/' . $month . '">' . date('F Y', strtotime($month . '/01')) . '</a></li>';
+
+			$count = 0;
+			$more = false;
+			foreach ($years as $year => $months) {
+				foreach ($months as $month => $post_count) {
+					if ($count++ >= $GLOBALS['config']['sidebar_archive_limit']) {
+						$more = true;
+						break 2;
+					}
+					echo '<li><a href="' . PathToRoot::get() . 'archive/view/' . $year . '/' . $month . '">' . date('F Y', strtotime($year . '/' . $month . '/01')) . ' (' . $post_count . ' post' . ($post_count == 1 ? '' : 's') . ')</a></li>';
+				}
+			}
 		?>
 	</ul>
+
+	<?php
+		if ($more)
+			echo '<a href="' . PathToRoot::get() . 'archive">more&hellip;</a>';
+	?>
 
 </div>

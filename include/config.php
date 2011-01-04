@@ -113,9 +113,10 @@ $config['use_snippets'] = true;
 // inside any elements.
 $config['snippet_marker'] = '{snip}';
 
-// Number of popular tags and recent comments to display in the sidebar
-$config['sidebar_tag_limit'] = 3;
+// Number of popular tags, recent comments, and archive months to display in the sidebar
+$config['sidebar_tag_limit']     = 3;
 $config['sidebar_comment_limit'] = 4;
+$config['sidebar_archive_limit'] = 5;
 
 // Number of columns in which to display tags & archive months on index pages
 $config['tag_columns'] = 3;

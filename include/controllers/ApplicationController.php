@@ -131,7 +131,7 @@ class ApplicationController extends BaseController {
 		// Archive
 		if ($params['show_archive']) {
 			$archive_view = new TemplateView('archive/_list.php');
-			$archive_view->assign('months', PostTable()->yearMonthList());
+			$archive_view->assign('years', PostTable()->yearMonthList());
 			$archive = $archive_view->getOutput();
 		} else {
 			$archive = null;

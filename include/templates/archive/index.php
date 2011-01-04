@@ -6,38 +6,13 @@
 
 		foreach ($years as $year => $months) {
 
-			echo "<h2>{$year}</h2><ul>";
+			echo '<div class="archive-year"><h2>' . $year . '</h2><ul>';
 
 			foreach ($months as $month => $post_count) {
-				echo "<li>{$month} ({$post_count})</li>";
+				echo '<li><a href="' . PathToRoot::get() . 'archive/view/' . $year . '/' . $month . '">' . date('F', strtotime($year . '/' . $month . '/01')) . ' (' . $post_count . ' post' . ($post_count == 1 ? '' : 's') . ')</a></li>';
 			}
 
-			echo '</ul>';
-		}
-
-
-		$num_long_cols = count($months) % $GLOBALS['config']['archive_columns'];
-
-		$count = 0;
-		for($col = 0; $col < $GLOBALS['config']['archive_columns']; $col++) {
-
-			// I normally wouldn't use inline styling, but since the width is
-			// dependent on a PHP config variable, I feel it's okay to calculate
-			// it here, rather than doing it manually in the main stylesheet
-			// (thus having the same value in two places).
-			echo '<ul style="width:' . 100 / $GLOBALS['config']['archive_columns'] . '%">';
-
-				$num_rows = floor(count($months) / $GLOBALS['config']['archive_columns']);
-
-				if ($col < $num_long_cols)
-					$num_rows++;
-
-				for ($row = 0; $row < $num_rows; $row++) {
-					echo '<li><a href="' . PathToRoot::get() . 'archive/view/' . $months[$count] . '">' . $months[$count] . '</a></li>';
-					$count++;
-				}
-
-			echo '</ul>';
+			echo '</ul></div>';
 		}
 	?>
 
