@@ -21,11 +21,13 @@ if (!isset($routes)) {
 }
 
 // Comment form URL
-$routes[] = new ChitinRoute('comments/add/:post_id', array('controller' => 'comments', 'action' => 'add'));
+// The normal :controller/:action/:id route would suffice here,
+// but we want to use :post_id instead of :id.
+$routes[] = new ChitinRoute('comments/add/:post_id', array('controller' => 'comments', 'action' => 'add'), array('id' => '\d+'));
 
 // Archive year/month URL
-// @todo: regex for year & month
-$routes[] = new ChitinRoute('archive/view/:year/:month', array('controller' => 'archive', 'action' => 'view'));
+// Allow years 1970-2037, months 01-12
+$routes[] = new ChitinRoute('archive/view/:year/:month', array('controller' => 'archive', 'action' => 'view'), array('year' => '(?:19[789]\d|20(?:[012]\d|3[0-7]))', 'month' => '(?:0[1-9]|1[012])'));
 
 // Standard Chitin URLs
 $routes[] = new ChitinRoute(':controller/:action/:id', array(), array('action' => 'edit|delete|view|feed', 'id' => '\d+'));
