@@ -8,7 +8,7 @@
 
 		if (!empty($error_content)) echo '<div class=\'errorlistview\'>' . $error_content . '</div>';
 
-		echo FormHelper::form_open(array('action' => 'comments/add/' . $post->id . '#comment-form'));
+		echo FormHelper::form_open(array('action' => 'comments/add/' . $post->id . '#comment-area'));
 
 			echo '<fieldset>';
 
@@ -32,6 +32,7 @@
 
 			echo FormHelper::hidden(array('name' => 'post_id', 'value' => $post->id));
 
+			echo FormHelper::submit(array('name' => 'submit', 'value' => 'Preview'));
 			echo FormHelper::submit(array('name' => 'submit', 'value' => 'Submit'));
 		?>
 		</fieldset>

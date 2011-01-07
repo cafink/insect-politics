@@ -16,22 +16,35 @@ class CommentsController extends ApplicationController {
 
 		if (isset($_POST['submit'])) {
 
-			$comment = new Comment($_POST);
+			$this->comment = new Comment($_POST);
 
-			if ($comment->save()) {
-				// @todo: Check whether special characters need escaping here
-				$message = 'A reader has commented on the post "' . $this->post->title . '" (http' . (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on') ? 's' : '' ) . "://". $_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME']) . '/posts/view/' . $this->post->id . '#comment-' . $comment->id . ').';
-				mail($this->post->author->email, 'New Comment', $message, "From: webmaster@{$_SERVER['HTTP_HOST']}");
+			$errors = $this->comment->validate('INSERT');
 
-				if ($GLOBALS['config']['approve_comments'])
-					$append = '?comment-pending=true#comments';
-				else
-					$append = '#comment-' . $comment->id;
+			if (empty($errors)) {
 
-				$this->redirect('posts/view/' . $this->post->id . $append);
-				die();
+				if ($_POST['submit'] == 'Preview') {
+
+					$preview_view = new TemplateView('comments/_preview.php');
+					$preview_view->assign('comment', $this->comment);
+					$this->preview = $preview_view->getOutput();
+
+				} else {
+
+					$this->comment->save();
+
+					// @todo: Check whether special characters need escaping here
+					$message = 'A reader has commented on the post "' . $this->post->title . '" (http' . (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on') ? 's' : '' ) . "://". $_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME']) . '/posts/view/' . $this->post->id . '#comment-' . $this->comment->id . ').';
+					mail($this->post->author->email, 'New Comment', $message, "From: webmaster@{$_SERVER['HTTP_HOST']}");
+
+					$append = $GLOBALS['config']['approve_comments'] ?
+						'?comment-pending=true#comments' :
+						'#comment-' . $this->comment->id;
+
+					$this->redirect('posts/view/' . $this->post->id . $append);
+				}
+
+
 			} else {
-				$errors = $comment->getErrors();
 				$error_view = new TemplateView('error/list.php');
 				$error_view->assign('errors', $errors);
 				$error_content = $error_view->getOutput();
