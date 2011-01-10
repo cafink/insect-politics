@@ -23,11 +23,14 @@
 					</a>
 				</div>
 
-				<div class="content"><?php
-					echo is_null($GLOBALS['config']['comment_html']) ? htmlentities($comment->snippet) : strip_tags($comment->snippet, $GLOBALS['config']['comment_html']);
-					if (strlen($comment->body) > strlen($comment->snippet))
-						echo '&hellip;';
-				?></div>
+				<div class="content">
+					<?php
+						// User input has already been escaped in the model.
+						echo $comment->snippet;
+						if (strlen($comment->body) > strlen($comment->snippet))
+							echo '&hellip;';
+					?>
+				</div>
 
 			</li>
 		<?php } ?>

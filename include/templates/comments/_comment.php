@@ -35,13 +35,6 @@
 		says&hellip;
 	</div>
 	<div class="timestamp"><?php echo date($GLOBALS['config']['date_format'], strtotime($comment->timestamp)); ?></div>
-	<div class="body">
-		<?php
-			// If no HTML is allowed in comments, all entities will be escaped,
-			// so the actual HTML code will be displayed.
-			// If some tags are allowed, all disallowed tags will be stripped instead of escaped.
-			$body = is_null($GLOBALS['config']['comment_html']) ? htmlentities($comment->body) : strip_tags($comment->body, $GLOBALS['config']['comment_html']);
-			echo str_replace("\n", '<br />', $body);
-		?>
-	</div>
+	<!-- User input has already been escaped in the model. -->
+	<div class="body"><?php echo $comment->body; ?></div>
 </div>

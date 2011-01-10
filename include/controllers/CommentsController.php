@@ -3,7 +3,6 @@
 include_once 'models/Comment.php';
 
 // @todo: Feed of comments?
-// @todo: Allow users to preview their comment before submission
 
 class CommentsController extends ApplicationController {
 

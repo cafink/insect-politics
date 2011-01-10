@@ -40,6 +40,20 @@ class Comment extends BaseRow {
 		return $errors;
 	}
 
+	// We normally escape user-input in the view, but because we're doing something
+	// a little more complicated here (since some tags might be allowed), and because
+	// it needs to display in multiple places (specifically, both the regular comment
+	// display and the pre-submission preview), it seems prudent to abstract it out
+	// to the model.
+	function filter ($body) {
+
+		// If no HTML is allowed in comments, all entities will be escaped,
+		// so the actual HTML code will be displayed.
+		// If some tags are allowed, all disallowed tags will be stripped instead of escaped.
+		$body = is_null($GLOBALS['config']['comment_html']) ? htmlentities($body) : strip_tags($body, $GLOBALS['config']['comment_html']);
+		return str_replace("\n", '<br />', $body);
+	}
+
 	function callbackBeforeSave () {
 
 		// @todo: Check whether an author is logged in, and if so,
@@ -60,6 +74,8 @@ class Comment extends BaseRow {
 
 		if (!empty($this->homepage) && (!(substr($this->homepage, 0, 7) == 'http://' || substr($this->homepage, 0, 8) == 'https://')))
 			$this->homepage = 'http://' . $this->homepage;
+
+		$this->body = $this->filter($this->body);
 
 		if (strlen($this->body) > $GLOBALS['config']['comment_snippet_length'])
 			$this->snippet = substr($this->body, 0, $GLOBALS['config']['comment_snippet_length']);
