@@ -26,36 +26,24 @@
 
 	<p><?php echo $author->bio; ?></p>
 
-	<?php
-		if ($author->social_media) {
+	<?php if ($author->social_media) { ?>
 
-			echo '<div class="social-media">';
+		<div class="social-media">
 
-			if (!empty($author->facebook_username)) {
+		<?php if (!empty($author->facebook_username)) { ?>
+			<a href="http://www.facebook.com/<?php echo $author->facebook_username; ?>">
+				<img src="<?php echo PathToRoot::get(); ?>images/social-media/facebook.png" width="24" height="24" alt="Become <?php echo $author->name; ?>'s friend on Facebook" />
+			</a>
+		<?php } ?>
 
-				// @todo: There must be a better way to handle this logic!
-				$class = 'first';
-				if (empty($author->twitter_username))
-					$class .= ' last';
+		<?php if (!empty($author->twitter_username)) { ?>
+			<a href="http://www.twitter.com/<?php echo $author->twitter_username; ?>">
+				<img src="<?php echo PathToRoot::get(); ?>images/social-media/twitter.png" width="24" height="24" alt="Follow <?php echo $author->name; ?> on Twitter" />
+			</a>
+		<?php } ?>
 
-				echo '<a href="http://www.facebook.com/' . $author->facebook_username . '">';
-				echo '<img src="' . PathToRoot::get() . 'images/social-media/facebook.png" width="24" height="24" class="' . $class . '" alt="Become ' . $author->name . '\'s friend on Facebook" />';
-				echo '</a>';
-			}
+		</div>
 
-			if (!empty($author->twitter_username)) {
-
-				$class = 'last';
-				if (empty($author->facebook_username))
-					$class = 'first ' . $class;
-
-				echo '<a href="http://www.twitter.com/' . $author->twitter_username . '">';
-				echo '<img src="' . PathToRoot::get() . 'images/social-media/twitter.png" width="24" height="24" class="' . $class . '" alt="Follow ' . $author->name . ' on Twitter" />';
-				echo '</a>';
-			}
-
-			echo '</div>';
-		}
-	?>
+	<?php } ?>
 
 </div>
