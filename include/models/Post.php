@@ -93,10 +93,10 @@ class Post extends BaseRow {
 		foreach ($this->tags as $tag)
 			$this->tag_list[] = $tag->name;
 
-		// @todo: Think of a better way to handle images in posts.
-		$this->body = str_replace(
-			'<img src="',
-			'<img src="' . PathToRoot::get() . 'images/posts/' . $this->short_name . '/',
+		// Link images to the correct directory.
+		$this->body = preg_replace(
+			'|(<img\s.*?src=")(.*?\s/>)|is',
+			'$1' . PathToRoot::get() . 'images/posts/' . $this->short_name . '/$2',
 			$this->body
 		);
 
@@ -121,10 +121,9 @@ class Post extends BaseRow {
 		}
 
 		// Because we can't use relative links in feeds.
-		// @todo: As above, we need to come up with a better solution!
-		$this->feed_body = str_replace(
-			'<img src="',
-			'<img src="http://' . $_SERVER['SERVER_NAME'],
+		$this->feed_body = preg_replace(
+			'|(<img\s.*?src=")(.*?\s/>)|is',
+			'$1' . 'http://' . $_SERVER['SERVER_NAME'] . '$2',
 			$this->body
 		);
 
