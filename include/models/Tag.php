@@ -21,6 +21,23 @@ class Tag extends BaseRow {
 		);
 	}
 
+	function getByName ($name) {
+
+		// Tag names might come from the URL, where spaces are replaced by hyphens,
+		// but they might also contain a legitimate hyphen.
+		$tag_like = str_replace('-', '%', $name);
+
+		$tag =  $this->find(array(
+			'where' => "LOWER(name) LIKE LOWER('{$tag_like}')",
+			'first' => true
+		));
+
+		if (is_null($tag))
+			throw new BaseRowRecordNotFoundException('Could not locate Tag ' . $name);
+
+		return $tag;
+	}
+
 	// Find the most popular tags, sorted in descending order of popularity.
 	function popular ($num = null) {
 
@@ -38,12 +55,28 @@ class Tag extends BaseRow {
 
 		$tags = array_slice($tags, 0, $num);
 
-		return array($tags, $more);
+		$obj_tags = array();
+		foreach ($tags as $i => $tag) {
+			$obj_tags[$i] = new Tag($tag);
+			$obj_tags[$i]->callbackAfterFetch();
+		}
+
+		return array($obj_tags, $more);
 	}
 
 	function validate ($type) {
 		$errors = array();
 		return $errors;
+	}
+
+	function callbackAfterFetch() {
+
+		// A URL-friendly version of the tag name.
+		// Specifically, we replace spaces with hyphens,
+		// but we might need to adjust this in the future,
+		// should we ever use other URL-unfriendly characters
+		// in tag names.
+		$this->link_name = strtolower(str_replace(' ', '-', $this->name));
 	}
 
 }

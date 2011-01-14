@@ -29,6 +29,11 @@ $routes[] = new ChitinRoute('comments/add/:post_id', array('controller' => 'comm
 // Allow years 1970-2037, months 01-12
 $routes[] = new ChitinRoute('archive/view/:year/:month', array('controller' => 'archive', 'action' => 'view'), array('year' => '(?:19[789]\d|20(?:[012]\d|3[0-7]))', 'month' => '(?:0[1-9]|1[012])'));
 
+// Allow tag URLs without the "view" component, and allow strings in the ID component,
+// so we can use the tag name instead of ID number.
+$routes[] = new ChitinRoute('tags/:action/:id', array('controller' => 'tags'));
+$routes[] = new ChitinRoute('tags/:id', array('controller' => 'tags', 'action' => 'view'));
+
 // Standard Chitin URLs
 $routes[] = new ChitinRoute(':controller/:action/:id', array(), array('action' => 'edit|delete|view|feed', 'id' => '\d+'));
 $routes[] = new ChitinRoute(':controller/:action', array('action' => 'index'));

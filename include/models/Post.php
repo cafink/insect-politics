@@ -30,7 +30,6 @@ class Post extends BaseRow {
 		);
 	}
 
-	// @todo: Accept either a tag name or id
 	function tagScope ($tag_id) {
 		return $this->scope(array('where' => "id IN (SELECT {$this->associations['tags']->local_key} FROM {$this->associations['tags']->table} WHERE {$this->associations['tags']->remote_key} = ?)", 'params' => array($tag_id)));
 	}

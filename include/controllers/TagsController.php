@@ -15,9 +15,13 @@ class TagsController extends ApplicationController {
 
 	function view ($coords) {
 
-		$this->tag = TagTable()->get($coords['id']);
+		// Allow tags to be specified by name instead of ID.
+		if (!is_numeric($coords['id']))
+			$this->tag = TagTable()->getByName($coords['id']);
+		else
+			$this->tag = TagTable()->get($coords['id']);
 
-		list($tag_posts, $this->pager_html) = $this->paginate(PostTable()->tagScope($coords['id']));
+		list($tag_posts, $this->pager_html) = $this->paginate(PostTable()->tagScope($this->tag->id));
 
 		$this->tag->posts = array();
 		foreach($tag_posts as $post) {

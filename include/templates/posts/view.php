@@ -50,7 +50,7 @@
 
 				// Zero-width space (&#8203;) used to separate words (instead of no space),
 				// so that the text-transform: capitalize; style may be applied.
-				echo '<a href="' . PathToRoot::get() . 'tags/view/' . $tag->id . '" class="' . $class . '">' . $tag->name . '</a>&#8203;';
+				echo '<a href="' . PathToRoot::get() . 'tags/' . $tag->link_name . '" class="' . $class . '">' . $tag->name . '</a>&#8203;';
 				$first = false;
 			}
 

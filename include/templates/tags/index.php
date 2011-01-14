@@ -21,7 +21,7 @@
 					$num_rows++;
 
 				for ($row = 0; $row < $num_rows; $row++) {
-					echo '<li><a href="' . PathToRoot::get() . 'tags/view/' . $tags[$count]->id . '" class="tag">' . $tags[$count]->name . '</a> <span class="note">(' . count($tags[$count]->posts) . ' post' . (count($tags[$count]->posts) == 1 ? '' : 's') . ')</span></li>';
+					echo '<li><a href="' . PathToRoot::get() . 'tags/' . $tags[$count]->link_name . '" class="tag">' . $tags[$count]->name . '</a> <span class="note">(' . count($tags[$count]->posts) . ' post' . (count($tags[$count]->posts) == 1 ? '' : 's') . ')</span></li>';
 					$count++;
 				}
 
