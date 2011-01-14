@@ -32,6 +32,7 @@ $routes[] = new ChitinRoute('archive/view/:year/:month', array('controller' => '
 // Allow tag URLs without the "view" component, and allow strings in the ID component,
 // so we can use the tag name instead of ID number.
 $routes[] = new ChitinRoute('tags/:action/:id', array('controller' => 'tags'));
+$routes[] = new ChitinRoute('tags/index', array('controller' => 'tags', 'action' => 'index'));
 $routes[] = new ChitinRoute('tags/:id', array('controller' => 'tags', 'action' => 'view'));
 
 // Standard Chitin URLs
