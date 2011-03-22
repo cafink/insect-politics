@@ -137,7 +137,7 @@ class ApplicationController extends BaseController {
 			$archive = null;
 		}
 
-		$view = new TemplateView('sidebar.php');
+		$view = new TemplateView('_sidebar.php');
 
 		$view->assign('show_authors', $params['show_authors']);
 		$view->assign('authors', $authors);
