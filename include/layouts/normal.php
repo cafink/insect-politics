@@ -32,6 +32,21 @@
 				echo '<meta http-equiv="refresh" content="4;url=' . $redir .'" />';
 		?>
 
+		<?php
+
+			if (isset($page['script']))
+				$page['scripts'] = $page['script'];
+
+			if (isset($page['scripts'])) {
+
+				if (!is_array($page['scripts']))
+					$page['scripts'] = array($page['scripts']);
+
+				foreach ($page['scripts'] as $script)
+					echo '<script type="text/javascript" src="' . PathToRoot::get() . 'js/' . $script . '"></script>';
+			}
+		?>
+
 	</head>
 
 	<body<?php if (isset($page['onload'])) echo ' onload="'.$page['onload'].'"'; ?>>
