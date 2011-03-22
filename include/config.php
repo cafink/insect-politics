@@ -56,7 +56,7 @@ $config['logo'] = null; /*array(
 	'height'   => 88
 );*/
 
-$config['copyright'] = '2010, 2011 Carl Fink';
+$config['copyright'] = '2009&ndash;2011 Carl Fink';
 
 // Date displayed for each post
 $config['date_format'] = 'F jS, Y';
