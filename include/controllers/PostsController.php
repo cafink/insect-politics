@@ -26,8 +26,10 @@ class PostsController extends ApplicationController {
 		else
 			$this->post = PostTable()->find(array('fields' => 'short_name', 'values' => $coords['id'], 'first' => true));
 
-		if (empty($this->post))
-			$this->redirect('posts');
+		if (empty($this->post)) {
+			$this->httpStatus(404);
+			die();
+		}
 
 		// An author's name should not link to a list of his posts
 		// if he is the only author.
