@@ -30,17 +30,17 @@
 
 		<div class="social-media">
 
-		<?php if (!empty($author->facebook_username)) { ?>
-			<a href="http://www.facebook.com/<?php echo $author->facebook_username; ?>">
-				<img src="<?php echo PathToRoot::get(); ?>images/social-media/facebook.png" width="24" height="24" alt="Become <?php echo $author->name; ?>'s friend on Facebook" />
-			</a>
-		<?php } ?>
+			<?php if (!empty($author->facebook_username)) { ?>
+				<a href="http://www.facebook.com/<?php echo $author->facebook_username; ?>">
+					<img src="<?php echo PathToRoot::get(); ?>images/social-media/facebook.png" width="24" height="24" alt="Become <?php echo $author->name; ?>'s friend on Facebook" />
+				</a>
+			<?php } ?>
 
-		<?php if (!empty($author->twitter_username)) { ?>
-			<a href="http://www.twitter.com/<?php echo $author->twitter_username; ?>">
-				<img src="<?php echo PathToRoot::get(); ?>images/social-media/twitter.png" width="24" height="24" alt="Follow <?php echo $author->name; ?> on Twitter" />
-			</a>
-		<?php } ?>
+			<?php if (!empty($author->twitter_username)) { ?>
+				<a href="http://www.twitter.com/<?php echo $author->twitter_username; ?>">
+					<img src="<?php echo PathToRoot::get(); ?>images/social-media/twitter.png" width="24" height="24" alt="Follow <?php echo $author->name; ?> on Twitter" />
+				</a>
+			<?php } ?>
 
 		</div>
 
