@@ -17,7 +17,7 @@ class CommentsController extends ApplicationController {
 
 			$this->comment = new Comment($_POST);
 
-			$errors = $this->comment->validate('INSERT');
+			$errors = $this->comment->validate();
 
 			if (empty($errors)) {
 

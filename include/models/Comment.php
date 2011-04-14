@@ -29,7 +29,7 @@ class Comment extends BaseRow {
 		$this->default_order_by = "timestamp {$GLOBALS['config']['comment_order']}";
 	}
 
-	function validate ($type) {
+	function validate ($type = 'INSERT') {
 		$errors = array();
 
 		if (empty($this->body))

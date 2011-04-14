@@ -64,7 +64,7 @@ class Tag extends BaseRow {
 		return array($obj_tags, $more);
 	}
 
-	function validate ($type) {
+	function validate ($type = 'INSERT') {
 		$errors = array();
 		return $errors;
 	}

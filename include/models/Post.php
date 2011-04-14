@@ -47,7 +47,7 @@ class Post extends BaseRow {
 		return $this->scope(array('where' => "timestamp LIKE '{$year}-{$month}%'"));
 	}
 
-	function validate ($type) {
+	function validate ($type = 'INSERT') {
 		$errors = array();
 		return $errors;
 	}

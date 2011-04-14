@@ -16,7 +16,7 @@ class Author extends BaseRow {
 		);
 	}
 
-	function validate ($type) {
+	function validate ($type = 'INSERT') {
 		$errors = array();
 		return $errors;
 	}
