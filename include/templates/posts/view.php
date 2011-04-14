@@ -2,9 +2,9 @@
 	<?php
 
 		if (!is_null($post->prev))
-			echo '<a id="prev" href="' . PathToRoot::get() . 'posts/view/' . $post->prev->id . '">' . $post->prev->title . '</a>';
+			echo '<a id="prev" href="' . PathToRoot::get() . 'posts/' . $post->prev->short_name . '">' . $post->prev->title . '</a>';
 		if (!is_null($post->next))
-			echo '<a id="next" href="' . PathToRoot::get() . 'posts/view/' . $post->next->id . '">' . $post->next->title . '</a>';
+			echo '<a id="next" href="' . PathToRoot::get() . 'posts/' . $post->next->short_name . '">' . $post->next->title . '</a>';
 
 	?>
 </div>

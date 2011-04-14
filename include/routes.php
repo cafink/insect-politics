@@ -35,8 +35,10 @@ $routes[] = new ChitinRoute('tags/:action/:id', array('controller' => 'tags'));
 $routes[] = new ChitinRoute('tags/index', array('controller' => 'tags', 'action' => 'index'));
 $routes[] = new ChitinRoute('tags/:id', array('controller' => 'tags', 'action' => 'view'));
 
-// Allow short names in post URLs (don't force ID to be numeric).
-$routes[] = new ChitinRoute('posts/view/:id', array('controller' => 'posts', 'action' => 'view'));
+// Same, for posts.
+$routes[] = new ChitinRoute('posts/:action/:id', array('controller' => 'posts'));
+$routes[] = new ChitinRoute('posts/index', array('controller' => 'posts', 'action' => 'index'));
+$routes[] = new ChitinRoute('posts/:id', array('controller' => 'posts', 'action' => 'view'));
 
 // Standard Chitin URLs
 $routes[] = new ChitinRoute(':controller/:action/:id', array(), array('action' => 'edit|delete|view|feed', 'id' => '\d+'));

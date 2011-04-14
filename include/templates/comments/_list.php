@@ -18,7 +18,7 @@
 
 					on
 
-					<a href="<?php echo PathToRoot::get(); ?>posts/view/<?php echo $comment->post->id; ?>#comment-<?php echo $comment->id; ?>">
+					<a href="<?php echo PathToRoot::get(); ?>posts/<?php echo $comment->post->short_name; ?>#comment-<?php echo $comment->id; ?>">
 						<?php echo $comment->post->title; ?>:
 					</a>
 				</div>

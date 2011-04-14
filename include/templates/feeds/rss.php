@@ -20,7 +20,7 @@
 					<?php
 						echo htmlentities(
 							$post->feed_body .
-							'<p><a href="http://' . $_SERVER['SERVER_NAME'] . PathToRoot::get() . $post->short_name . '#comments">Read the comments on this post</a></p>'
+							'<p><a href="http://' . $_SERVER['SERVER_NAME'] . PathToRoot::get() . 'posts/' . $post->short_name . '#comments">Read the comments on this post</a></p>'
 						);
 					?>
 				</description>
