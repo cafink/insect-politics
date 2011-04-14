@@ -40,6 +40,6 @@
 		</ul>
 	<?php } ?>
 
-	<ul id="all-feeds"><li><a href="<?php echo PathToRoot::get(); ?>posts/feed">main feed</a></li></ul>
+	<ul id="all-feeds"><li><a href="<?php echo PathToRoot::get(); ?>posts/feed">all posts</a></li></ul>
 
 </div>
