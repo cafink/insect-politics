@@ -24,11 +24,11 @@
 				</div>
 
 				<div class="content"><?php
-						// User input has already been escaped in the model.
-						echo $comment->snippet;
-						if (strlen($comment->body) > strlen($comment->snippet))
-							echo '&hellip;';
-					?></div>
+					// User input has already been escaped in the model.
+					echo $comment->snippet;
+					if (strlen($comment->body) > strlen($comment->snippet))
+						echo '&hellip;';
+				?></div>
 
 			</li>
 		<?php } ?>
