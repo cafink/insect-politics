@@ -1,1 +1,3 @@
 include/config.php
+include/logs/*
+!include/logs/.keep
