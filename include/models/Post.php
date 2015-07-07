@@ -85,6 +85,18 @@ class Post extends BaseRow {
 		return $years;
 	}
 
+	// Used in the copyright notice.
+	function firstPostYear() {
+		$date = $this->find(array(
+			'sort_fields'     => 'timestamp',
+			'sort_directions' => 'ASC',
+			'first'           => true,
+			'callback'        => false
+		))->timestamp;
+
+		return date('Y', strtotime($date));
+	}
+
 	function callbackAfterFetch () {
 
 		// Used for putting tags into the Keywords meta tag

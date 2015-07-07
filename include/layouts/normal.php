@@ -82,7 +82,7 @@
 
 		</div>
 
-		<div id="footer">&copy; <?php echo $GLOBALS['config']['copyright']; ?></div>
+		<div id="footer"><?php $copyright = new TemplateView('_copyright.php'); $copyright->display(); ?></div>
 
 	</body>
 </html>
