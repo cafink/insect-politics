@@ -63,6 +63,18 @@
 <?php if ($GLOBALS['config']['show_comments']) { ?>
 	<div id="comments"></div>
 	<script type="text/jsx">
-		// Your code here
+		var CommentBox = React.createClass({
+			render: function() {
+				return (
+					<div className="commentBox">
+						Hello, world!  I am a CommentBox.
+					</div>
+				);
+			}
+		});
+		React.render(
+			<CommentBox />,
+			document.getElementById('comments')
+		);
 	</script>
 <?php } ?>
