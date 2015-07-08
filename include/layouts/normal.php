@@ -32,6 +32,10 @@
 				echo '<meta http-equiv="refresh" content="4;url=' . $redir .'" />';
 		?>
 
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
 		<?php
 
 			if (isset($page['script']))

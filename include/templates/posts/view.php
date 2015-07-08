@@ -60,7 +60,9 @@
 
 </div>
 
-<?php
-	if ($GLOBALS['config']['show_comments'])
-		echo $comments;
-?>
+<?php if ($GLOBALS['config']['show_comments']) { ?>
+	<div id="comments"></div>
+	<script type="text/jsx">
+		// Your code here
+	</script>
+<?php } ?>
