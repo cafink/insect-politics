@@ -63,12 +63,23 @@
 <?php if ($GLOBALS['config']['show_comments']) { ?>
 	<div id="comments"></div>
 	<script type="text/jsx">
+		var data = [
+			{author: "Carl Fink", text: "This is one comment"},
+			{author: "Elaine Broussard", text: "This is *another* comment"}
+		];
+
 		var CommentList = React.createClass({
 			render: function() {
+				var commentNodes = this.props.data.map(function (comment) {
+					return (
+						<Comment author={comment.author}>
+							{comment.text}
+						</Comment>
+					);
+				});
 				return (
 					<div className="commentList">
-						<Comment author="Carl Fink">This is one comment</Comment>
-						<Comment author="Elaine Broussard">This is *another* comment</Comment>
+						{commentNodes}
 					</div>
 				);
 			}
@@ -103,14 +114,15 @@
 				return (
 					<div className="commentBox">
 						<h2>Comments</h2>
-						<CommentList />
+						<CommentList data={this.props.data} />
 						<CommentForm />
 					</div>
 				);
 			}
 		});
+
 		React.render(
-			<CommentBox />,
+			<CommentBox data={data} />,
 			document.getElementById('comments')
 		);
 	</script>
