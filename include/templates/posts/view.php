@@ -67,7 +67,8 @@
 			render: function() {
 				return (
 					<div className="commentList">
-						Hello, world!  I am a CommentList.
+						<Comment author="Carl Fink">This is one comment</Comment>
+						<Comment author="Elaine Broussard">This is *another* comment</Comment>
 					</div>
 				);
 			}
