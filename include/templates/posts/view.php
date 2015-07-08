@@ -81,7 +81,7 @@
 						<h3 className="commentAuthor">
 							{this.props.author}
 						</h3>
-						{this.props.children}
+						{marked(this.props.children.toString())}
 					</div>
 				);
 			}
