@@ -63,11 +63,6 @@
 <?php if ($GLOBALS['config']['show_comments']) { ?>
 	<div id="comments"></div>
 	<script type="text/jsx">
-		var data = [
-			{author: "Carl Fink", text: "This is one comment"},
-			{author: "Elaine Broussard", text: "This is *another* comment"}
-		];
-
 		var CommentList = React.createClass({
 			render: function() {
 				var commentNodes = this.props.data.map(function (comment) {
@@ -110,11 +105,27 @@
 		})
 
 		var CommentBox = React.createClass({
+			getInitialState: function() {
+				return {data: []};
+			},
+			componentDidMount: function() {
+				$.ajax({
+					url: this.props.url,
+					dataType: 'json',
+					cache: false,
+					success: function(data) {
+						this.setState({data: data});
+					}.bind(this),
+					error: function(xhr, status, err) {
+						console.error(this.props.url, status, err.toString());
+					}.bind(this)
+				});
+			},
 			render: function() {
 				return (
 					<div className="commentBox">
 						<h2>Comments</h2>
-						<CommentList data={this.props.data} />
+						<CommentList data={this.state.data} />
 						<CommentForm />
 					</div>
 				);
@@ -122,7 +133,7 @@
 		});
 
 		React.render(
-			<CommentBox data={data} />,
+			<CommentBox url="<?php echo PathToRoot::get(); ?>comments.json" />,
 			document.getElementById('comments')
 		);
 	</script>
