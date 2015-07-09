@@ -133,6 +133,10 @@
 				});
 			},
 			handleCommentSubmit: function(comment) {
+				var comments = this.state.data;
+				var newComments = comments.concat([comment]);
+				console.log(newComments);
+				this.setState({data: newComments});
 				$.ajax({
 					url: this.props.url,
 					dataType: 'json',
