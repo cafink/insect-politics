@@ -1,3 +1,14 @@
+@font-face {
+	font-family: 'RockwellStd';
+	src: url('../include/fonts/RockwellStd.otf');
+}
+
+@font-face {
+	font-family: 'RockwellStd';
+	src: url('../include/fonts/RockwellStd-Bold.otf');
+	font-weight: bold;
+}
+
 /*  Headers & Footers */
 
 #header {
@@ -24,7 +35,7 @@ body {
 }
 
 h1, h2, #logo {
-	font-family: Rockwell, Arial, Verdana, sans-serif;
+	font-family: RockwellStd, Rockwell, Arial, Verdana, sans-serif;
 }
 
 h1 a, h2 a, #logo a {
