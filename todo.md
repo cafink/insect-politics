@@ -5,5 +5,4 @@
 	- https://github.com/erusev/parsedown
 	- https://github.com/kzykhys/Ciconia
 	- https://github.com/maxtsepkov/markdown-oo-php
-- Implement spam detection for comments (possibly via [Akismet](https://akismet.com/)).
 - Import posts & comments from [Blogger](http://cafink.blogspot.com).

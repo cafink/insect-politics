@@ -122,4 +122,7 @@ $config['archive_columns'] = 3;
 // "rss" or "atom," or null for no feed
 $config['feed'] = 'rss';
 
+// API key for Akismet spam detection
+$config['akismet_key'] = '';
+
 ?>

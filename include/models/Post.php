@@ -111,7 +111,7 @@ class Post extends BaseRow {
 			$this->body
 		);
 
-		$this->comments = $this->scope('approved')->comments;
+		$this->comments = $this->scope('nonspam')->scope('approved')->comments;
 
 		$snippet_marker = $GLOBALS['config']['snippet_marker'];
 

@@ -117,7 +117,7 @@ class ApplicationController extends BaseController {
 		// Comments
 		if ($params['show_comments']) {
 			$comment_view = new TemplateView('comments/_list.php');
-			$comment_view->assign('comments', CommentTable()->scope('approved')->find(array(
+			$comment_view->assign('comments', CommentTable()->scope('nonspam')->scope('approved')->find(array(
 				'page'            => 1,
 				'per_page'        => $GLOBALS['config']['sidebar_comment_limit'],
 				'sort_fields'     => 'timestamp',

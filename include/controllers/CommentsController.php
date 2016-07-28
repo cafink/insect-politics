@@ -31,13 +31,16 @@ class CommentsController extends ApplicationController {
 
 					$this->comment->save();
 
-					// @todo: Check whether special characters need escaping here
-					$message = 'A reader has commented on the post "' . $this->post->title . '" (http' . (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on') ? 's' : '' ) . "://". $_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME']) . '/posts/view/' . $this->post->id . '#comment-' . $this->comment->id . ').';
-					mail($this->post->author->email, 'New Comment', $message, "From: webmaster@{$_SERVER['HTTP_HOST']}");
+					// Don't bother sending the e-mail for spam
+					if (!$this->comment->spam) {
+						// @todo: Check whether special characters need escaping here
+						$message = 'A reader has commented on the post "' . $this->post->title . '" (http' . (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on') ? 's' : '' ) . "://". $_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME']) . '/posts/view/' . $this->post->id . '#comment-' . $this->comment->id . ').';
+						mail($this->post->author->email, 'New Comment', $message, "From: webmaster@{$_SERVER['HTTP_HOST']}");
 
-					$append = $GLOBALS['config']['approve_comments'] ?
-						'?comment-pending=true#comments' :
-						'#comment-' . $this->comment->id;
+						$append = $GLOBALS['config']['approve_comments'] ?
+							'?comment-pending=true#comments' :
+							'#comment-' . $this->comment->id;
+					}
 
 					$this->redirect('posts/view/' . $this->post->id . $append);
 				}

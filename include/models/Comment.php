@@ -8,7 +8,8 @@ class Comment extends BaseRow {
 	public $table_name = 'comments';
 
 	protected $scopes = array(
-			'approved' => array('fields' => 'status', 'values' => 'approved')
+		'nonspam' => array('fields' => 'spam', 'values' => false),
+		'approved' => array('fields' => 'status', 'values' => 'approved')
 	);
 
 	function setup () {
@@ -58,12 +59,18 @@ class Comment extends BaseRow {
 
 		// @todo: Check whether an author is logged in, and if so,
 		// set the author_id foreign key, and set name, e-mail & homepage to NULL.
+		// Update the detectSpam() function below, too!
 		$this->author_id = null;
 
 		$this->ip = $_SERVER['REMOTE_ADDR'];
 
 		$this->timestamp = date($GLOBALS['config']['timestamp_format']);
 
+		// Note that, in theory, we don't actually want to perform these actions
+		// upon every save.  But in practice, comments can't be edited and so
+		// are only saved once, upon their initial submission.  Should this ever
+		// change, this logic will probably need to move to the controller.
+		$this->detectSpam();
 		$this->status = $GLOBALS['config']['approve_comments'] ? 'pending' : 'approved';
 	}
 
@@ -81,7 +88,56 @@ class Comment extends BaseRow {
 			$this->snippet = substr($this->body, 0, $GLOBALS['config']['comment_snippet_length']);
 		else
 			$this->snippet = $this->body;
+	}
 
+	function detectSpam () {
+
+		$comment_data = array(
+			'blog' => PathToRoot::get(),
+			'user_ip' => $this->ip,
+			'user_agent' => null, // This field is required, but we don't track it right now
+			'referrer' => null, // this isn't required, but we should start tracking it, too
+			'permalink' => PathToRoot::get() . 'posts/view/' . $this->id,
+			'comment_type' => 'comment',
+			'comment_author' => $this->name,
+			'comment_author_email' => $this->email,
+			'comment_author_url' => $this->homepage,
+			'comment_content' => $this->body,
+			'comment_date_gmt' => $this->created, // seems to work, but I'm not certain this is the right format, and it isn't in GMT
+			'comment_post_modified_gmt' => $this->post->updated,
+			'blog_lang' => 'en',
+			'blog_charset' => 'UTF-8', // again, I'm not actually sure whether this is right
+			'user_role' => 'user',
+			'is_test' => false
+		);
+
+		// Test data to ensure that a comment is/isn't marked as spam:
+		// $comment_data['comment_author'] = 'viagra-test-123';
+		// $comment_data['user_role'] = 'administrator';
+
+		$url = $GLOBALS['config']['akismet_key'] . '.rest.akismet.com';
+		$path = '/1.1/comment-check';
+
+		$curl = curl_init($url . $path);
+
+		curl_setopt_array($curl, array(
+			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_POSTFIELDS => http_build_query($comment_data)
+		));
+
+		$results = curl_exec($curl);
+		// $info = curl_getinfo($curl);
+		// $error = curl_error($curl);
+
+		curl_close($curl);
+
+		if ($results === false) {
+			// There was an error.  Allow it through.
+			// @todo: log this (message in $error, above).
+			$this->spam = false;
+		} else {
+			$this->spam = $results == 'true';
+		}
 	}
 }
 

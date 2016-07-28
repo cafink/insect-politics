@@ -23,6 +23,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
 	`ip` varchar(255) DEFAULT NULL,
 	`body` text NOT NULL,
 	`timestamp` timestamp NOT NULL,
+	`spam` boolean NOT NULL,
 	`status` enum('pending','approved','rejected') NOT NULL,
 	PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
