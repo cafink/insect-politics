@@ -1,0 +1,9 @@
+- Implement Markdown/Commonmark for posts & comments.  Potential plugins:
+	- https://github.com/thephpleague/commonmark
+	- https://github.com/michelf/php-markdown
+	- https://github.com/cebe/markdown
+	- https://github.com/erusev/parsedown
+	- https://github.com/kzykhys/Ciconia
+	- https://github.com/maxtsepkov/markdown-oo-php
+- Implement spam detection for comments (possibly via [Akismet](https://akismet.com/)).
+- Import posts & comments from [Blogger](http://cafink.blogspot.com).
