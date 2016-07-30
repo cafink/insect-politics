@@ -27,7 +27,7 @@
 
 		echo '<div class="timestamp">' . date($GLOBALS['config']['date_format'], strtotime($post->timestamp)) . '</div>';
 
-		echo $post->body_html;
+		echo '<div class="body">' . $post->body_html . '</div>';
 
 		if (!empty($post->tags)) {
 
