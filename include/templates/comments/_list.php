@@ -26,7 +26,7 @@
 				<div class="content"><?php
 					// User input has already been escaped in the model.
 					echo $comment->snippet;
-					if (strlen($comment->body) > strlen($comment->snippet))
+					if (strlen($comment->body_html) > strlen($comment->snippet))
 						echo '&hellip;';
 				?></div>
 

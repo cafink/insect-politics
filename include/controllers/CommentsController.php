@@ -23,6 +23,10 @@ class CommentsController extends ApplicationController {
 
 				if ($_POST['submit'] == 'Preview') {
 
+					// Because this is where the input sanitization and
+					// Markdown conversion happens
+					$this->comment->callbackAfterFetch();
+
 					$preview_view = new TemplateView('comments/_preview.php');
 					$preview_view->assign('comment', $this->comment);
 					$this->preview = $preview_view->getOutput();

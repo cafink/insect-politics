@@ -25,8 +25,7 @@
 			echo FormHelper::text(array('name' => 'homepage'));
 
 			$comment_text = 'comment';
-			if (!is_null($GLOBALS['config']['comment_html']))
-				$comment_text .= ' <span class="note">(you may use HTML tags for style)</span>';
+			$comment_text .= ' <span class="note">(you may style your comment with <a href="https://daringfireball.net/projects/markdown/">Markdown</a>)</span>';
 			echo FormHelper::label(array('name' => 'body', 'text' => $comment_text . ':'));
 			echo FormHelper::textarea(array('name' => 'body', 'rows' => 8, 'cols' => 40));
 

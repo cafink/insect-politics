@@ -36,5 +36,5 @@
 	</div>
 	<div class="timestamp"><?php echo date($GLOBALS['config']['date_format'], strtotime($comment->timestamp)); ?></div>
 	<!-- User input has already been escaped in the model. -->
-	<div class="body"><?php echo $comment->body; ?></div>
+	<div class="body"><?php echo $comment->body_html; ?></div>
 </div>

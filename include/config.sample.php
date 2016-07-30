@@ -77,10 +77,6 @@ $config['show_comments'] = true;
 
 $config['comment_order'] = 'ASC';
 
-// String of tags allowed in HTML comments (used in strip_tags())
-// Set to null to completely disable HTML in comments.
-$config['comment_html'] = '<a><i><b><em><strong><blockquote>';
-
 // Display e-mail address for comments
 // If false, an "e-mail address will not be displayed" message appears
 // in the comment form, so beware of enabling this later!
