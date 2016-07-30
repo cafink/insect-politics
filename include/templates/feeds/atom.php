@@ -23,10 +23,9 @@
 			</author>
 			<content type="html">
 				<?php
-					echo htmlentities(
-						$post->feed_body .
-						'<p><a href="http://' . $_SERVER['SERVER_NAME'] . PathToRoot::get() . 'posts/' . $post->short_name . '#comments">Read the comments on this post</a></p>'
-					);
+					echo htmlentities($post->feed_body);
+					if ($GLOBALS['config']['show_comments'])
+						echo htmlentities('<p><a href="http://' . $_SERVER['SERVER_NAME'] . PathToRoot::get() . 'posts/' . $post->short_name . '#comments">Read the comments on this post</a></p>');
 				?>
 			</content>
 			<published><?php echo date(DATE_ATOM, strtotime($post->timestamp)); ?></published>
