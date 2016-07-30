@@ -71,12 +71,17 @@ class Comment extends BaseRow {
 		// We use strip_tags() to remove HTML from the comment, then use
 		// ParseDown to convert Markdown to HTML.  Is this sufficient to
 		// completely sanitize the user's input?
-		$this->body_html = ParseDown::instance()->text(strip_tags($this->body));
+		$this->body = strip_tags($this->body);
+		$this->body_html = ParseDown::instance()->text($this->body);
 
+		// If we just use body_html to create the snippet, things will get
+		// screwy if the end of the snippet occurs in the middle of an HTML tag.
+		// Instead, we use the raw version of it, without rendering the Mardown.
+		// @todo: find a better way to handle markup in comment snippets.
 		if (strlen($this->body) > $GLOBALS['config']['comment_snippet_length'])
-			$this->snippet = substr($this->body_html, 0, $GLOBALS['config']['comment_snippet_length']);
+			$this->snippet = substr($this->body, 0, $GLOBALS['config']['comment_snippet_length']);
 		else
-			$this->snippet = $this->body_html;
+			$this->snippet = $this->body;
 	}
 
 	function detectSpam () {
