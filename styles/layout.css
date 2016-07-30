@@ -183,6 +183,10 @@ h1 a, h2 a, #logo a {
 	content: '\201D';  /* right double-quote */
 }
 
+#comment-list .content p {
+	display: inline;
+}
+
 /* Comments */
 
 #comment-form label {
