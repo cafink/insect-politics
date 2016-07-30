@@ -2,7 +2,7 @@
 
 <h2><?php echo $post->title; ?></h2>
 
-<?php echo '<div class="body' . (($GLOBALS['config']['use_snippets'] && $post->has_snippet) ? ' snippet' : '') . '">' . (($GLOBALS['config']['use_snippets'] && $post->has_snippet) ? $post->snippet : $post->body) . '</div>'; ?>
+<?php echo '<div class="body' . (($GLOBALS['config']['use_snippets'] && $post->has_snippet) ? ' snippet' : '') . '">' . (($GLOBALS['config']['use_snippets'] && $post->has_snippet) ? $post->snippet : $post->body_html) . '</div>'; ?>
 
 <!-- We don't know ahead of time whether the user will preview his comment,
      so we can't know whether the form should link to the #preview or #comment-form element.
