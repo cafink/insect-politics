@@ -3,6 +3,39 @@
 include_once 'models/Author.php';
 include_once 'models/Comment.php';
 include_once 'models/Tag.php';
+include_once 'vendor/parsedown/Parsedown.php';
+
+class PostParser extends Parsedown {
+
+	private $short_name;
+
+	// Instantiate with post short_name, for use in image path, below.
+	// It seems like we should be able to use the existing $instance_name for
+	// this purpose, but it doesn't actually seem to be accessible from within
+	// the inlineImage() function.
+	static function instance ($short_name, $instance_name = 'default') {
+		$instance = parent::instance($instance_name);
+		$instance->short_name = $short_name;
+		return $instance;
+	}
+
+	// Prepend image filename with full path.
+	protected function inlineImage ($Excerpt) {
+		$Image = parent::inlineImage($Excerpt);
+		$Image['element']['attributes']['src'] = PathToRoot::get() . 'images/posts/' . $this->short_name . '/' . $Image['element']['attributes']['src'];
+		return $Image;
+	}
+}
+
+// A different parser is needed for the feed, since relative links won't work.
+// Maybe we should just use absolute URLs for both to make things simpler?
+class FeedParser extends PostParser {
+	protected function inlineImage ($Excerpt) {
+		$Image = parent::inlineImage($Excerpt);
+		$Image['element']['attributes']['src'] = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['SERVER_NAME'] . $Image['element']['attributes']['src'];
+		return $Image;
+	}
+}
 
 class Post extends BaseRow {
 
@@ -104,14 +137,10 @@ class Post extends BaseRow {
 		foreach ($this->tags as $tag)
 			$this->tag_list[] = $tag->name;
 
-		// Link images to the correct directory.
-		$this->body = preg_replace(
-			'|(<img\s.*?src=")(.*?\s/>)|is',
-			'$1' . PathToRoot::get() . 'images/posts/' . $this->short_name . '/$2',
-			$this->body
-		);
-
 		$this->comments = $this->scope('nonspam')->scope('approved')->comments;
+
+		$this->body_html = PostParser::instance($this->short_name, 'post')->text($this->body);
+		$this->feed_body = FeedParser::instance($this->short_name, 'feed')->text($this->body);
 
 		$snippet_marker = $GLOBALS['config']['snippet_marker'];
 
@@ -120,23 +149,16 @@ class Post extends BaseRow {
 		// value which evaluates to FALSE (specifically, the Integer 0).  But
 		// in our case, there's no snippet to extract if the marker is the
 		// first thing in the post, so doing it this way is okay.
-		$this->has_snippet = strpos($this->body, $snippet_marker) ? true : false;
+		$this->has_snippet = strpos($this->body_html, $snippet_marker) ? true : false;
 
 		if ($this->has_snippet) {
-			$this->snippet = substr($this->body, 0, strpos($this->body, $snippet_marker));
+			$this->snippet = substr($this->body_html, 0, strpos($this->body_html, $snippet_marker));
 
-			$this->body = str_replace($snippet_marker, '<a name="continue"></a>', $this->body);
+			$this->body_html = str_replace($snippet_marker, '<a name="continue"></a>', $this->body_html);
 
 		} else {
-			$this->snippet = $this->body;
+			$this->snippet = $this->body_html;
 		}
-
-		// Because we can't use relative links in feeds.
-		$this->feed_body = preg_replace(
-			'|(<img\s.*?src=")(.*?\s/>)|is',
-			'$1' . 'http://' . $_SERVER['SERVER_NAME'] . '$2',
-			$this->body
-		);
 
 		// Mark the comments made by the post's author.
 		// Should we also mark comments made by other authors?

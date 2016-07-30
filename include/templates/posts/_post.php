@@ -8,7 +8,7 @@
 
 		echo '<div class="timestamp">' . date($GLOBALS['config']['date_format'], strtotime($post->timestamp)) . '</div>';
 
-		echo '<div class="body' . (($GLOBALS['config']['use_snippets'] && $post->has_snippet) ? ' snippet' : '') . '">' . (($GLOBALS['config']['use_snippets'] && $post->has_snippet) ? $post->snippet : $post->body) . '</div>';
+		echo '<div class="body' . (($GLOBALS['config']['use_snippets'] && $post->has_snippet) ? ' snippet' : '') . '">' . (($GLOBALS['config']['use_snippets'] && $post->has_snippet) ? $post->snippet : $post->body_html) . '</div>';
 
 		if ($post->has_snippet || $GLOBALS['config']['show_comments']) {
 			echo '<div class="links">';
