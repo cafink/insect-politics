@@ -22,7 +22,8 @@ class PostParser extends Parsedown {
 	// Prepend image filename with full path.
 	protected function inlineImage ($Excerpt) {
 		$Image = parent::inlineImage($Excerpt);
-		$Image['element']['attributes']['src'] = PathToRoot::get() . 'images/posts/' . $this->short_name . '/' . $Image['element']['attributes']['src'];
+		if (isset($Image['element']['attributes']['src']))
+			$Image['element']['attributes']['src'] = PathToRoot::get() . 'images/posts/' . $this->short_name . '/' . $Image['element']['attributes']['src'];
 		return $Image;
 	}
 }
@@ -32,7 +33,8 @@ class PostParser extends Parsedown {
 class FeedParser extends PostParser {
 	protected function inlineImage ($Excerpt) {
 		$Image = parent::inlineImage($Excerpt);
-		$Image['element']['attributes']['src'] = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['SERVER_NAME'] . $Image['element']['attributes']['src'];
+		if (isset($Image['element']['attributes']['src']))
+			$Image['element']['attributes']['src'] = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['SERVER_NAME'] . $Image['element']['attributes']['src'];
 		return $Image;
 	}
 }
