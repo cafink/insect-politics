@@ -1,1 +1,0 @@
-- Import posts & comments from [Blogger](http://cafink.blogspot.com).
