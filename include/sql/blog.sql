@@ -5,7 +5,6 @@ CREATE TABLE IF NOT EXISTS `authors` (
 	`name` varchar(255) NOT NULL,
 	`email` varchar(255) NOT NULL,
 	`bio` text NOT NULL,
-	`img` varchar(255) NOT NULL,
 	`facebook_username` varchar(255) DEFAULT NULL,
 	`twitter_username` varchar(255) DEFAULT NULL,
 	PRIMARY KEY (`id`)

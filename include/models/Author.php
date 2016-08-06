@@ -32,6 +32,23 @@ class Author extends BaseRow {
 	function callbackAfterFetch () {
 		$this->social_media = !empty($this->facebook_username) || !empty($this->twitter_username);
 	}
+
+	function gravatarUrl ($params) {
+
+		// default size
+		if (empty($params['s']))
+			$params['s'] = 192;
+
+		// default "mystery man" image
+		if (empty($params['d']))
+			$params['d'] = 'mm';
+
+		// @todo: Intelligently decide between http/https
+		$url = 'https://www.gravatar.com/avatar/';
+		$hash = md5(strtolower(trim($this->email)));
+
+		return $url . $hash . '?' . http_build_query($params);
+	}
 }
 
 function AuthorTable () {

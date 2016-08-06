@@ -62,10 +62,7 @@ $config['date_format'] = 'F jS, Y';
 $config['timestamp_format'] = 'Y-m-d H:i:s';
 
 // Author images for the sidebar
-$config['author_img'] = array(
-	'width'  => 192,
-	'height' => 128
-);
+$config['author_img_size'] = 192;
 
 // Whether or not readers may submit new comments
 $config['enable_comments'] = true;

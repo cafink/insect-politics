@@ -2,9 +2,9 @@
 
 	$name = $author->name;
 	$img  = '<img ' .
-		'src="' . PathToRoot::get() . 'images/authors/' . $author->img . '" ' .
-		'width="' . $GLOBALS['config']['author_img']['width'] . '" ' .
-		'height="' . $GLOBALS['config']['author_img']['height'] . '" ' .
+		'src="' . $author->gravatarUrl() . '" ' .
+		'width="' . $GLOBALS['config']['author_img_size'] . '" ' .
+		'height="' . $GLOBALS['config']['author_img_size'] . '" ' .
 		'alt="' . $author->name . '" ' .
 		'class="photo" />';
 
