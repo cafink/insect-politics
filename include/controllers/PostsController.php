@@ -31,6 +31,8 @@ class PostsController extends ApplicationController {
 			die();
 		}
 
+		$this->post->registerView();
+
 		// An author's name should not link to a list of his posts
 		// if he is the only author.
 		$this->link = AuthorTable()->multiple();

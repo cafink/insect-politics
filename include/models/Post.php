@@ -3,6 +3,7 @@
 include_once 'models/Author.php';
 include_once 'models/Comment.php';
 include_once 'models/Tag.php';
+include_once 'models/View.php';
 include_once 'vendor/parsedown/Parsedown.php';
 
 class PostParser extends Parsedown {
@@ -186,6 +187,37 @@ class Post extends BaseRow {
 			'first'           => true,
 			'callback'        => false
 		));
+	}
+
+	function registerView () {
+
+		$ip_address = $_SERVER['REMOTE_ADDR'];
+
+		$view = ViewTable()->find(array(
+			'fields' => array('post_id', 'ip'),
+			'values' => array($this->id, $ip_address),
+			'first' => true
+		));
+
+		if (empty($view)) {
+
+			$user_agent = $_SERVER['HTTP_USER_AGENT'];
+			$view = new View(array(
+				'post_id'    => $this->id,
+				'ip'         => $ip_address,
+				'user_agent' => $user_agent,
+				'count'      => 1
+			));
+			$view->save();
+
+		} else {
+
+			// If this IP has already viewed this post, increment the count, but
+			// don't worry about the timestamp of individual views, or further
+			// tracking their user agent.
+			$view->increment();
+
+		}
 	}
 }
 
