@@ -20,6 +20,9 @@
 // Note, we are using ini_[gs]et instead of [gs]et_include_path as it is more portable
 ini_set('include_path', dirname(__FILE__) . PATH_SEPARATOR .  ini_get('include_path'));
 
+// PEAR path for Directnic hosting
+ini_set('include_path', '/home/utifulb2/php:' . ini_get('include_path')  );
+
 // Typically this would be set in your Apache configuration.  If nothing is there, assume we're production for safety
 if (!isset($_ENV['SERVER_ENV']))
 	$_ENV['SERVER_ENV'] = 'production';
