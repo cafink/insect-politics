@@ -14,7 +14,7 @@
 
 	<?php foreach ($posts as $post) { ?>
 		<entry>
-			<id>http://<?php echo $_SERVER['SERVER_NAME'] . PathToRoot::get() . $post->short_name; ?></id>
+			<id>http://<?php echo $_SERVER['SERVER_NAME'] . PathToRoot::get() . 'posts/' . $post->short_name; ?></id>
 			<title><?php echo htmlentities($post->title); ?></title>
 			<updated><?php echo date(DATE_ATOM, strtotime($post->timestamp)); ?></updated>
 			<author>

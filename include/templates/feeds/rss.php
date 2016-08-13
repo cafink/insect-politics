@@ -15,7 +15,7 @@
 		<?php foreach ($posts as $post) { ?>
 			<item>
 				<title><?php echo htmlentities($post->title); ?></title>
-				<link>http://<?php echo $_SERVER['SERVER_NAME'] . PathToRoot::get() . $post->short_name; ?></link>
+				<link>http://<?php echo $_SERVER['SERVER_NAME'] . PathToRoot::get() . 'posts/' . $post->short_name; ?></link>
 				<description>
 					<?php
 						echo htmlentities($post->feed_body);
@@ -25,7 +25,7 @@
 				</description>
 				<author><?php echo $post->author->email; ?></author>
 				<?php if ($GLOBALS['config']['show_comments']) { ?>
-					<comments>http://<?php echo $_SERVER['SERVER_NAME'] . PathToRoot::get() . $post->short_name; ?>#comments</comments>
+					<comments>http://<?php echo $_SERVER['SERVER_NAME'] . PathToRoot::get() . 'posts/' . $post->short_name; ?>#comments</comments>
 				<?php } ?>
 				<guid isPermaLink="false"><?php echo $post->short_name; ?></guid>
 				<pubDate><?php echo date(DATE_RSS, strtotime($post->timestamp)); ?></pubDate>
