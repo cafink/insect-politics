@@ -37,6 +37,7 @@ $routes[] = new ChitinRoute('tags/:id', array('controller' => 'tags', 'action' =
 
 // Same, for posts.
 $routes[] = new ChitinRoute('posts/:action/:id', array('controller' => 'posts'));
+$routes[] = new ChitinRoute('posts/search', array('controller' => 'posts', 'action' => 'search'));
 $routes[] = new ChitinRoute('posts/index', array('controller' => 'posts', 'action' => 'index'));
 $routes[] = new ChitinRoute('posts/feed', array('controller' => 'posts', 'action' => 'feed'));
 $routes[] = new ChitinRoute('posts/:id', array('controller' => 'posts', 'action' => 'view'));
