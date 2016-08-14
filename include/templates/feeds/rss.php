@@ -8,7 +8,7 @@
 		<language>en-us</language>
 		<copyright><?php $copyright = new TemplateView('_copyright.php'); $copyright->display(); ?></copyright>
 		<?php if (!empty($author)) { ?>
-			<managingEditor><?php echo $author->email; ?></managingEditor>
+			<managingEditor><?php echo $author->email; ?> (<?php echo $author->name; ?>)</managingEditor>
 		<?php } ?>
 		<lastBuildDate><?php echo date(DATE_RSS, strtotime($posts[0]->timestamp)); ?></lastBuildDate>
 
@@ -23,7 +23,7 @@
 							echo htmlentities('<p><a href="http://' . $_SERVER['SERVER_NAME'] . PathToRoot::get() . 'posts/' . $post->short_name . '#comments">Read the comments on this post</a></p>');
 					?>
 				</description>
-				<author><?php echo $post->author->email; ?></author>
+				<author><?php echo $post->author->email; ?> (<?php echo $post->author->name; ?>)</author>
 				<?php if ($GLOBALS['config']['show_comments']) { ?>
 					<comments>http://<?php echo $_SERVER['SERVER_NAME'] . PathToRoot::get() . 'posts/' . $post->short_name; ?>#comments</comments>
 				<?php } ?>
