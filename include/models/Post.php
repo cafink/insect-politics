@@ -5,6 +5,7 @@ include_once 'models/Comment.php';
 include_once 'models/Tag.php';
 include_once 'models/View.php';
 include_once 'vendor/parsedown/Parsedown.php';
+include_once 'vendor/smartypants/smartypants.php';
 
 class PostParser extends Parsedown {
 
@@ -142,8 +143,11 @@ class Post extends BaseRow {
 
 		$this->comments = $this->scope('nonspam')->scope('approved')->comments;
 
-		$this->body_html = PostParser::instance($this->short_name, 'post')->text($this->body);
-		$this->feed_body = FeedParser::instance($this->short_name, 'feed')->text($this->body);
+		// We have to perform the SmartyPants transformation before the Markdown
+		// one because our Markdown parser, automatically converts double quotes
+		// to the &quot; entity, which prevents them from being transformed.
+		$this->body_html = PostParser::instance($this->short_name, 'post')->text(SmartyPants($this->body, $GLOBALS['config']['smartypants_format']));
+		$this->feed_body = FeedParser::instance($this->short_name, 'feed')->text(SmartyPants($this->body, $GLOBALS['config']['smartypants_format']));
 
 		$snippet_marker = $GLOBALS['config']['snippet_marker'];
 
