@@ -72,7 +72,7 @@ class Comment extends BaseRow {
 		// ParseDown to convert Markdown to HTML.  Is this sufficient to
 		// completely sanitize the user's input?
 		$this->body = strip_tags($this->body);
-		$this->body_html = ParseDown::instance()->text(SmartyPants($this->body, $GLOBALS['config']['smartypants_format']));
+		$this->body_html = SmartyPants(CommentParser::instance()->text($this->body), $GLOBALS['config']['smartypants_format']);
 
 		// If we just use body_html to create the snippet, things will get
 		// screwy if the end of the snippet occurs in the middle of an HTML tag.

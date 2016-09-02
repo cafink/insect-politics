@@ -7,7 +7,39 @@ include_once 'models/View.php';
 include_once 'vendor/parsedown/Parsedown.php';
 include_once 'vendor/smartypants/smartypants.php';
 
-class PostParser extends Parsedown {
+// The parser retains almost all of its default behavior for comments, except
+// that we don't want to escape double-quotes, which would prevent them from
+// being subsequently tranformed by SmartyPants.
+class CommentParser extends Parsedown {
+
+	// This is pretty much an exact copy of Parsedown's built-in function,
+	// except that the double-quote character has been removed from the
+	// $specialCharacter array.  Since that array is hard-coded in the middle of
+	// the function, there isn't really a way to modify the existing function's
+	// behavior, so we're simply re-implementing it.
+	protected function inlineSpecialCharacter ($Excerpt) {
+		if ($Excerpt['text'][0] === '&' and ! preg_match('/^&#?\w+;/', $Excerpt['text'])) {
+			return array(
+				'markup' => '&amp;',
+				'extent' => 1,
+			);
+		}
+
+		$SpecialCharacter = array('>' => 'gt', '<' => 'lt');
+
+		if (isset($SpecialCharacter[$Excerpt['text'][0]])) {
+			return array(
+				'markup' => '&' . $SpecialCharacter[$Excerpt['text'][0]] . ';',
+				'extent' => 1,
+			);
+		}
+	}
+}
+
+// For posts, we retain the comment parser's double-quote behavior, but also add
+// special handling for images, so we don't have to include the full path in our
+// markup.
+class PostParser extends CommentParser {
 
 	private $short_name;
 
@@ -143,11 +175,11 @@ class Post extends BaseRow {
 
 		$this->comments = $this->scope('nonspam')->scope('approved')->comments;
 
-		// We have to perform the SmartyPants transformation before the Markdown
-		// one because our Markdown parser, automatically converts double quotes
-		// to the &quot; entity, which prevents them from being transformed.
-		$this->body_html = PostParser::instance($this->short_name, 'post')->text(SmartyPants($this->body, $GLOBALS['config']['smartypants_format']));
-		$this->feed_body = FeedParser::instance($this->short_name, 'feed')->text(SmartyPants($this->body, $GLOBALS['config']['smartypants_format']));
+		// We have to perform the SmartyPants transformation after the Markdown
+		// one because SmartyPants will convert things like the quote characters
+		// in image tags, preventing them from rendering properly.
+		$this->body_html = SmartyPants(PostParser::instance($this->short_name, 'post')->text($this->body), $GLOBALS['config']['smartypants_format']);
+		$this->feed_body = SmartyPants(FeedParser::instance($this->short_name, 'feed')->text($this->body), $GLOBALS['config']['smartypants_format']);
 
 		$snippet_marker = $GLOBALS['config']['snippet_marker'];
 
