@@ -1,6 +1,7 @@
 <?php
 
 include_once 'models/Author.php';
+include_once 'views/XmlTemplateView.php';
 
 class AuthorsController extends ApplicationController {
 
@@ -29,6 +30,7 @@ class AuthorsController extends ApplicationController {
 		$this->author = AuthorTable()->get($coords['id']);
 		$this->posts = $this->author->posts;
 
+		header("Content-Type: text/xml");
 		$this->page['layout'] = false;
 		$this->render(array('file' => "feeds/{$GLOBALS['config']['feed']}.php"));
 

@@ -1,6 +1,7 @@
 <?php
 
 include_once 'models/Tag.php';
+include_once 'views/XmlTemplateView.php';
 
 class TagsController extends ApplicationController {
 
@@ -47,6 +48,7 @@ class TagsController extends ApplicationController {
 		if (!AuthorTable()->multiple())
 			$this->author = AuthorTable()->find(array('first' => true));
 
+		header("Content-Type: text/xml");
 		$this->page['layout'] = false;
 		$this->render(array('file' => "feeds/{$GLOBALS['config']['feed']}.php"));
 

@@ -6,7 +6,7 @@
 		<link>http://<?php echo $_SERVER['SERVER_NAME'] . PathToRoot::get(); ?></link>
 		<description><?php echo $GLOBALS['config']['site_name']; ?> blog</description>
 		<language>en-us</language>
-		<copyright><?php $copyright = new TemplateView('_copyright.php'); $copyright->display(); ?></copyright>
+		<copyright><?php $copyright = new XmlTemplateView('_copyright.php'); $copyright->display(); ?></copyright>
 		<?php if (!empty($author)) { ?>
 			<managingEditor><?php echo $author->email; ?> (<?php echo $author->name; ?>)</managingEditor>
 		<?php } ?>

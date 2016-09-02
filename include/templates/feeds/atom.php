@@ -10,7 +10,7 @@
 			<email><?php echo $author->email; ?></email>
 		</author>
 	<?php } ?>
-	<rights><?php $copyright = new TemplateView('_copyright.php'); $copyright->display(); ?></rights>
+	<rights><?php $copyright = new XmlTemplateView('_copyright.php'); $copyright->display(); ?></rights>
 
 	<?php foreach ($posts as $post) { ?>
 		<entry>
