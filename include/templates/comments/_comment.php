@@ -37,4 +37,15 @@
 	<div class="timestamp"><?php echo date($GLOBALS['config']['date_format'], strtotime($comment->timestamp)); ?></div>
 	<!-- User input has already been escaped in the model. -->
 	<div class="body"><?php echo $comment->body_html; ?></div>
+
+	<?php
+		$auth = new \pmill\Auth\Authenticate;
+		if ($auth->isLoggedIn() && is_null($comment->author_id)) {
+	?>
+		<div class="report-spam">
+			<a href="<?php echo PathToRoot::get(); ?>comments/spam/<?php echo $comment->id; ?>">
+				[ mark as spam ]
+			</a>
+		</div>
+	<?php } ?>
 </div>
