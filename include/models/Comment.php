@@ -91,7 +91,7 @@ class Comment extends BaseRow {
 			'user_ip' => $this->ip,
 			'user_agent' => null, // This field is required, but we don't track it right now
 			'referrer' => null, // this isn't required, but we should start tracking it, too
-			'permalink' => PathToRoot::get() . 'posts/view/' . $this->id,
+			'permalink' => PathToRoot::get() . 'posts/view/' . $this->post->id,
 			'comment_type' => 'comment',
 			'comment_author' => $this->name,
 			'comment_author_email' => $this->email,
