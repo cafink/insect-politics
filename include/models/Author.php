@@ -1,8 +1,9 @@
 <?php
 
 include_once 'models/Post.php';
+require_once 'vendor/php-auth/src/pmill/Auth/Interfaces/AuthUser.php';
 
-class Author extends BaseRow {
+class Author extends BaseRow implements \pmill\Auth\Interfaces\AuthUser {
 
 	public $table_name = "authors";
 	public $default_order_by = 'created ASC'; // Organize by seniority
@@ -48,6 +49,22 @@ class Author extends BaseRow {
 		$hash = md5(strtolower(trim($this->email)));
 
 		return $url . $hash . '?' . http_build_query($params);
+	}
+
+	public function getAuthId() {
+		return $this->id;
+	}
+
+	public function getAuthUsername() {
+		return $this->email;
+	}
+
+	public function getAuthPassword() {
+		return $this->password;
+	}
+
+	public function getTwoFactorSecret() {
+		return null;
 	}
 }
 

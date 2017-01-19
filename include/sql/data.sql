@@ -1,5 +1,5 @@
-INSERT INTO `authors` (`id`, `updated`, `created`, `name`, `email`, `bio`, `facebook_username`, `twitter_username`) VALUES
-(1, NOW(), NOW(), 'Carl Fink', 'cafink@gmail.com', 'Atheist, libertarian, skeptic.', 'cafink', 'cafink');
+INSERT INTO `authors` (`id`, `updated`, `created`, `name`, `email`, `password`, `bio`, `facebook_username`, `twitter_username`) VALUES
+(1, NOW(), NOW(), 'Carl Fink', 'cafink@gmail.com', NULL, 'Atheist, libertarian, skeptic.', 'cafink', 'cafink');
 
 -- All comments as of 2016-08-03
 INSERT INTO `comments` (`id`, `updated`, `created`, `author_id`, `post_id`, `name`, `email`, `homepage`, `ip`, `body`, `timestamp`, `spam`, `status`) VALUES

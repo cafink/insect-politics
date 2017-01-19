@@ -4,6 +4,7 @@ CREATE TABLE IF NOT EXISTS `authors` (
 	`created` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
 	`name` varchar(255) NOT NULL,
 	`email` varchar(255) NOT NULL,
+	`password` varchar(255) DEFAULT NULL,
 	`bio` text NOT NULL,
 	`facebook_username` varchar(255) DEFAULT NULL,
 	`twitter_username` varchar(255) DEFAULT NULL,

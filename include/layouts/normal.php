@@ -65,6 +65,16 @@
 					?>
 				</a>
 			</div>
+			<?php
+				$auth = new \pmill\Auth\Authenticate;
+				if ($auth->isLoggedIn()) {
+					$name = AuthorTable()->get($auth->getLoggedInUserId())->name;
+			?>
+				<div>
+					Logged in as <strong><?php echo $name; ?></strong>
+					<a href="<?php echo PathToRoot::get(); ?>authors/logout">[ log out ]</a>
+				</div>
+			<?php } ?>
 		</div>
 
 		<?php $has_sidebar = isset($page['sidebar']); ?>

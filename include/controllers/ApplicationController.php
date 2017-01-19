@@ -2,6 +2,30 @@
 
 include_once 'models/Author.php';
 
+// Includes for php-auth and its dependencies.  Admittedly, this
+// is a little overboard.  Maybe I should give in and use Composer?
+require_once 'vendor/Aura.Session/src/RandvalInterface.php';
+require_once 'vendor/Aura.Session/src/Session.php';
+require_once 'vendor/Aura.Session/src/SegmentInterface.php';
+require_once 'vendor/Aura.Session/src/CsrfToken.php';
+require_once 'vendor/Aura.Session/src/CsrfTokenFactory.php';
+require_once 'vendor/Aura.Session/src/Exception.php';
+require_once 'vendor/Aura.Session/src/Phpfunc.php';
+require_once 'vendor/Aura.Session/src/Randval.php';
+require_once 'vendor/Aura.Session/src/Segment.php';
+require_once 'vendor/Aura.Session/src/SegmentFactory.php';
+require_once 'vendor/Aura.Session/src/SessionFactory.php';
+require_once 'vendor/password_compat/lib/password.php';
+require_once 'vendor/php-auth/src/pmill/Auth/Exceptions/HashException.php';
+require_once 'vendor/php-auth/src/pmill/Auth/Exceptions/PasswordException.php';
+require_once 'vendor/php-auth/src/pmill/Auth/Exceptions/TwoFactorAuthException.php';
+require_once 'vendor/php-auth/src/pmill/Auth/Interfaces/AuthUser.php';
+require_once 'vendor/php-auth/src/pmill/Auth/Interfaces/PasswordHelper.php';
+require_once 'vendor/php-auth/src/pmill/Auth/Interfaces/TwoFactorAuthenticationHelper.php';
+require_once 'vendor/php-auth/src/pmill/Auth/Authenticate.php';
+require_once 'vendor/php-auth/src/pmill/Auth/Password.php';
+require_once 'vendor/php-auth/src/pmill/Auth/TwoFactorAuthentication.php';
+
 class ApplicationController extends BaseController {
 
 	protected function sidebar ($params = array()) {
