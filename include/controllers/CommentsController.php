@@ -71,7 +71,9 @@ class CommentsController extends ApplicationController {
 
 	function spam ($coords) {
 		$comment = CommentTable()->get($coords['id']);
-		$comment->missedSpam();
+		$auth = new \pmill\Auth\Authenticate;
+		if ($auth->isLoggedIn())
+			$comment->missedSpam();
 		$this->redirect('posts/view/' . $comment->post->id . '#comments');
 	}
 }
