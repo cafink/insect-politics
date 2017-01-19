@@ -196,7 +196,7 @@ h1 a, h2 a, #logo a {
 	text-transform: none;
 }
 
-#comment-form label, #comment-form text, #comment-form textarea {
+#comment-form label, #comment-form input, #comment-form textarea {
 	display: block;
 }
 
