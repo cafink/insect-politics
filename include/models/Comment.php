@@ -112,7 +112,7 @@ class Comment extends BaseRow {
 
 	function setAkismetData () {
 		return array(
-			'blog' => PathToRoot::get(),
+			'blog' => 'http://' . $_SERVER['SERVER_NAME'] . PathToRoot::get(),
 			'user_ip' => $this->ip,
 			'user_agent' => null, // This field is required, but we don't track it right now
 			'referrer' => null, // this isn't required, but we should start tracking it, too
