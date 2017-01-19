@@ -76,6 +76,19 @@ class CommentsController extends ApplicationController {
 			$comment->missedSpam();
 		$this->redirect('posts/view/' . $comment->post->id . '#comments');
 	}
+
+	// One-off function for marking tons of spam that was submitted in a short time
+	function annihilator ($coords) {
+		$auth = new \pmill\Auth\Authenticate;
+		if ($auth->isLoggedIn()) {
+			$date = '2016-10-12 00:00:00';
+			$comments = CommentTable()->find(array('where' => "Timestamp > '{$date}' AND spam = 0"));
+			foreach ($comments as $comment)
+				$comment->missedSpam();
+			$this->redirect('posts/');
+		}
+
+	}
 }
 
 ?>
