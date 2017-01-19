@@ -41,7 +41,7 @@ class Comment extends BaseRow {
 		return $errors;
 	}
 
-	function callbackBeforeSave () {
+	function setInfo () {
 
 		// @todo: Check whether an author is logged in, and if so,
 		// set the author_id foreign key, and set name, e-mail & homepage to NULL.
@@ -52,10 +52,6 @@ class Comment extends BaseRow {
 
 		$this->timestamp = date($GLOBALS['config']['timestamp_format']);
 
-		// Note that, in theory, we don't actually want to perform these actions
-		// upon every save.  But in practice, comments can't be edited and so
-		// are only saved once, upon their initial submission.  Should this ever
-		// change, this logic will probably need to move to the controller.
 		$this->detectSpam();
 		$this->status = $GLOBALS['config']['approve_comments'] ? 'pending' : 'approved';
 	}
@@ -86,7 +82,36 @@ class Comment extends BaseRow {
 
 	function detectSpam () {
 
-		$comment_data = array(
+		$comment_data = $this->setAkismetData();
+		$results = $this->makeAkismetRequest($comment_data, 'comment-check');
+
+		if ($results === false) {
+			// There was an error.  Allow it through.
+			// @todo: log this (message in $error, above).
+			$this->spam = false;
+		} else {
+			$this->spam = $results == 'true';
+		}
+	}
+
+	function missedSpam () {
+
+		if ($this->spam)
+			return;
+
+		$comment_data = $this->setAkismetData();
+		$results = $this->makeAkismetRequest($comment_data, 'submit-spam');
+
+		// If $results is false, there was an error;
+		// do nothing so we can try again later.
+		if ($results !== false) {
+			$this->spam = true;
+			$this->save(array('recurse' => 0, 'validate' => false));
+		}
+	}
+
+	function setAkismetData () {
+		return array(
 			'blog' => PathToRoot::get(),
 			'user_ip' => $this->ip,
 			'user_agent' => null, // This field is required, but we don't track it right now
@@ -104,19 +129,18 @@ class Comment extends BaseRow {
 			'user_role' => 'user',
 			'is_test' => false
 		);
+	}
 
-		// Test data to ensure that a comment is/isn't marked as spam:
-		// $comment_data['comment_author'] = 'viagra-test-123';
-		// $comment_data['user_role'] = 'administrator';
+	function makeAkismetRequest ($data, $path) {
 
 		$url = $GLOBALS['config']['akismet_key'] . '.rest.akismet.com';
-		$path = '/1.1/comment-check';
+		$version = '1.1';
 
-		$curl = curl_init($url . $path);
+		$curl = curl_init($url . '/' . $version . '/' . $path);
 
 		curl_setopt_array($curl, array(
 			CURLOPT_RETURNTRANSFER => true,
-			CURLOPT_POSTFIELDS => http_build_query($comment_data)
+			CURLOPT_POSTFIELDS => http_build_query($data)
 		));
 
 		$results = curl_exec($curl);
@@ -125,13 +149,7 @@ class Comment extends BaseRow {
 
 		curl_close($curl);
 
-		if ($results === false) {
-			// There was an error.  Allow it through.
-			// @todo: log this (message in $error, above).
-			$this->spam = false;
-		} else {
-			$this->spam = $results == 'true';
-		}
+		return $results;
 	}
 }
 

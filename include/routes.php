@@ -43,7 +43,7 @@ $routes[] = new ChitinRoute('posts/feed', array('controller' => 'posts', 'action
 $routes[] = new ChitinRoute('posts/:id', array('controller' => 'posts', 'action' => 'view'));
 
 // Standard Chitin URLs
-$routes[] = new ChitinRoute(':controller/:action/:id', array(), array('action' => 'edit|delete|view|feed', 'id' => '\d+'));
+$routes[] = new ChitinRoute(':controller/:action/:id', array(), array('action' => 'edit|delete|view|feed|spam', 'id' => '\d+'));
 $routes[] = new ChitinRoute(':controller/:action', array('action' => 'index'));
 
 ?>

@@ -33,6 +33,7 @@ class CommentsController extends ApplicationController {
 
 				} else {
 
+					$this->comment->setInfo();
 					$this->comment->save();
 
 					// Don't bother sending the e-mail for spam
@@ -66,6 +67,12 @@ class CommentsController extends ApplicationController {
 
 		$page['title'] = $this->post->title;
 		$this->render();
+	}
+
+	function spam ($coords) {
+		$comment = CommentTable()->get($coords['id']);
+		$comment->missedSpam();
+		$this->redirect('posts/view/' . $comment->post->id . '#comments');
 	}
 }
 
