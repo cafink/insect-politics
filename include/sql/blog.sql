@@ -21,6 +21,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
 	`email` varchar(255) DEFAULT NULL,
 	`homepage` varchar(255) DEFAULT NULL,
 	`ip` varchar(255) DEFAULT NULL,
+	`user_agent` varchar(255) DEFAULT NULL,
 	`body` text NOT NULL,
 	`timestamp` timestamp NOT NULL,
 	`spam` boolean NOT NULL,

@@ -49,6 +49,7 @@ class Comment extends BaseRow {
 		$this->author_id = null;
 
 		$this->ip = $_SERVER['REMOTE_ADDR'];
+		$this->user_agent = $_SERVER['HTTP_USER_AGENT'];
 
 		$this->timestamp = date($GLOBALS['config']['timestamp_format']);
 
@@ -114,8 +115,8 @@ class Comment extends BaseRow {
 		return array(
 			'blog' => 'http://' . $_SERVER['SERVER_NAME'] . PathToRoot::get(),
 			'user_ip' => $this->ip,
-			'user_agent' => null, // This field is required, but we don't track it right now
-			'referrer' => null, // this isn't required, but we should start tracking it, too
+			'user_agent' => $this->user_agent,
+			'referrer' => null, // this isn't required, but we should start tracking it
 			'permalink' => PathToRoot::get() . 'posts/view/' . $this->post->id,
 			'comment_type' => 'comment',
 			'comment_author' => $this->name,
